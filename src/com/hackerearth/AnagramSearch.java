@@ -7,9 +7,15 @@ import java.util.Scanner;
 /**
  * Given a string, find whether it has any permutation of another string. For example, given "abcdefg" and "ba",
  * it should return true, because "abcdefg" has substring "ab", which is a permutation of "ba".
+ *
+ * Algorithm
+ * 1. Calculate 'PH' as Pattern Hash using prime code for each character
+ * 2. populate histogram of characters in the pattern
+ * 3. calculate 'SH' as Hash of source string up to length of pattern
+ * 4. if ('PH' != 'SH') Remove leading digit, add trailing digit
+ * 5. if ('PH' == 'SH') check for exact match using histogram
  */
 public class AnagramSearch {
-
 
     private static Map<Character, Long> primes = new HashMap<Character, Long>();
     //Prime number generated from BigInteger.probablePrime(31, new Random())
@@ -72,8 +78,6 @@ public class AnagramSearch {
         inverse.put('x', 1719239945L);
         inverse.put('y', 450313973L);
         inverse.put('z', 1251115035L);
-
-
     }
 
 
@@ -104,12 +108,9 @@ public class AnagramSearch {
                 if (found)
                     break;
 
-
                 // Remove leading digit, add trailing digit, check for match.
                 sourceHash = (sourceHash * inverse.get(source.charAt(j - l))) % longRandomPrime;
-
                 sourceHash = (sourceHash * primes.get(source.charAt(j))) % longRandomPrime;
-
 
                 // match
                 int offset = j - l + 1;
@@ -149,9 +150,7 @@ public class AnagramSearch {
             } else
                 break;
         }
-
         return false;
-
 
     }
 
