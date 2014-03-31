@@ -21,21 +21,43 @@ import java.util.Scanner;
 
 public class UtopianTree {
 
+    private static int[] cycles = new int[10000];
+
+    static {
+        for (int i = 0; i < cycles.length; i++) {
+            cycles[i] = -1;
+        }
+    }
+
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int K = scanner.nextInt();
-        int[] cycles = new int[60];
-
-        cycles[0] = 1;
-        for (int i = 1; i < 60; i++) {
-            if (i % 2 == 0) {
-                cycles[i] = cycles[i - 1] + 1;
-            } else
-                cycles[i] = cycles[i - 1] * 2;
-        }
 
         for (int i = 0; i < K; i++) {
-            System.out.println(cycles[scanner.nextInt()]);
+            System.out.println(getLengthAfterNCycles(scanner.nextInt()));
         }
+    }
+
+    private static int getLengthAfterNCycles(int N) {
+
+        if (N == 0) {
+            cycles[N] = 1;
+        }
+
+        if (cycles[N] != -1)
+            return cycles[N];
+
+        int prev = getLengthAfterNCycles(N - 1);
+
+        if (N % 2 == 0) {
+            cycles[N] = prev + 1;
+            return cycles[N];
+        } else {
+            cycles[N] = prev * 2;
+            return cycles[N];
+        }
+
+
     }
 }
