@@ -1,4 +1,4 @@
-package com.hackerearth;
+package com.coderevisited.utils;
 
 import java.math.BigInteger;
 import java.util.Random;
