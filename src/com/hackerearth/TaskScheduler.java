@@ -6,7 +6,8 @@ import java.util.Scanner;
 
 /**
  * For a task i, it takes one day to start a job, and ki days to complete.
- * For given n tasks, schedule it effectively such that it takes min days to complete
+ * For given n tasks, schedule it effectively such that it takes min days to complete.
+ * Only one task can be started in a day. Started jobs can go on parallel.
  * <p/>
  * input:
  * 2 (No of tasks)
