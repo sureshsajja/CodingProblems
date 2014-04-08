@@ -3,14 +3,14 @@ package com.coderevisited.utils;
 /**
  * Implementation of Sieve of Atkin.. Generating prime numbers up to 1 billion
  */
-public class PrimeNumberGenerator {
+public class SieveOfAtkin {
 
     private static final long limit = 1000000000L;
 
 
     public static void main(String[] args) {
 
-        PrimeNumberGenerator generator = new PrimeNumberGenerator();
+        SieveOfAtkin generator = new SieveOfAtkin();
         long start = System.nanoTime();
         generator.sieve();
         System.out.println((double) (System.nanoTime() - start) / 1000000000.0);
