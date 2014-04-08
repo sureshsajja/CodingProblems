@@ -93,9 +93,9 @@ public class EmirpGenerator {
             }
         }
         System.out.println(emirps.size());
-        for (int i : emirps) {
-            System.out.println(i);
-        }
+//        for (int i : emirps) {
+//            System.out.println(i);
+//        }
     }
 
     private int reverse(int number) {
