@@ -7,7 +7,6 @@ package com.coderevisited.utils;
 public class SieveOfEratosthenes {
 
     private static final int MAX = 1000000000;
-    private static final int MEMORY_SIZE = MAX >> 1;
 
 
     public static void main(String[] args) {
@@ -23,7 +22,7 @@ public class SieveOfEratosthenes {
 
     private void sieve() {
 
-        BitVector vector = new BitVector(MEMORY_SIZE);
+        BitVector vector = new BitVector(MAX);
         int[] seq = new int[]{2, 4, 2, 4, 6, 2, 6, 4,
                 2, 4, 6, 6, 2, 6, 4, 2,
                 6, 4, 6, 8, 4, 2, 4, 2,
@@ -32,10 +31,14 @@ public class SieveOfEratosthenes {
                 6, 4, 2, 4, 2, 10, 2, 10};
         int index = 0;
         for (int i = 11; i < Math.sqrt(MAX); i += seq[index++]) {
-            if (!vector.isSet(i >> 1)) {
-                for (int j = (i * i) >> 1; j < MEMORY_SIZE; j = j + i) {
+            if (!vector.isSet(i)) {
+                int index2 = index;
+                for (int j = i * i; j < MAX; j = j + seq[index2++] * i) {
                     vector.setBit(j);
+                    if (index2 == 48)
+                        index2 = 0;
                 }
+
             }
             if (index == 48)
                 index = 0;
@@ -45,7 +48,7 @@ public class SieveOfEratosthenes {
         int count = 4;
         index = 0;
         for (int i = 11; i < MAX; i += seq[index++]) {
-            if (!vector.isSet(i >> 1)) {
+            if (!vector.isSet(i)) {
                 count++;
             }
             if (index == 48)
@@ -59,18 +62,18 @@ public class SieveOfEratosthenes {
         private int[] bitArray;
 
         public BitVector(long MAX) {
-            bitArray = new int[(int) (MAX >> 5) + 1];
+            bitArray = new int[(int) (MAX >> 6) + 1];
         }
 
         public void setBit(long i) {
-            int index = (int) (i >> 5);
-            int bit = (int) (i & 31);
+            int index = (int) (i >> 6);
+            int bit = (int) (i >> 1) & 31;
             bitArray[index] = (bitArray[index]) | (1 << bit);
         }
 
         public boolean isSet(long i) {
-            int index = (int) (i >> 5);
-            int bit = (int) (i & 31);
+            int index = (int) (i >> 6);
+            int bit = (int) (i >> 1) & 31;
             return ((bitArray[index]) & (1 << bit)) != 0;
         }
     }
