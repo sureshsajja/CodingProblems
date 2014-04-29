@@ -42,7 +42,7 @@ public class SieveOfEratosthenes {
 
         }
 
-        int count = 3;
+        int count = 4;
         index = 0;
         for (int i = 11; i < MAX; i += seq[index++]) {
             if (!vector.isSet(i >> 1)) {
