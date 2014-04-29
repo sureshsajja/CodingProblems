@@ -23,8 +23,6 @@ public class SieveOfEratosthenes {
     private void sieve() {
 
         BitVector vector = new BitVector(MEMORY_SIZE);
-
-
         for (int i = 3; i < Math.sqrt(MAX); i = i + 2) {
             if (!vector.isSet(i >> 1)) {
                 for (int j = (i * i) >> 1; j < MEMORY_SIZE; j = j + i) {
@@ -40,10 +38,7 @@ public class SieveOfEratosthenes {
                 count++;
             }
         }
-
         System.out.println(count);
-
-
     }
 
     private class BitVector {
@@ -53,7 +48,6 @@ public class SieveOfEratosthenes {
         public BitVector(long MAX) {
             bitArray = new int[(int) (MAX >> 5) + 1];
         }
-
 
         public void setBit(long i) {
             int index = (int) (i >> 5);
