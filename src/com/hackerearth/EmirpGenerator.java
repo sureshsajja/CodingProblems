@@ -1,5 +1,9 @@
 package com.hackerearth;
 
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+
 /**
  * Generate as many distinct primes P such that reverse (P) is also prime and is not equal to P.
  */
@@ -9,13 +13,15 @@ public class EmirpGenerator {
 
 
     public static void main(String[] args) {
+        PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 
         long start = System.nanoTime();
 
         EmirpGenerator emirpGenerator = new EmirpGenerator();
-        emirpGenerator.sieve();
+        emirpGenerator.sieve(out);
 
-        System.out.println((double) (System.nanoTime() - start) / 1000000000.0);
+        out.println((double) (System.nanoTime() - start) / 1000000000.0);
+        out.close();
 
     }
 
@@ -29,7 +35,7 @@ public class EmirpGenerator {
         return reverseNumber;
     }
 
-    private void sieve() {
+    private void sieve(PrintWriter out) {
 
         BitVector vector = new BitVector(MAX);
         int[] seq = new int[]{2, 4, 2, 4, 6, 2, 6, 4,
@@ -61,7 +67,7 @@ public class EmirpGenerator {
                 int reverse = reverse(i);
                 if ((reverse & 1) == 1 && reverse < MAX && i < reverse && (reverse & 3) != 0 && reverse % 5 != 0 && reverse % 7 != 0) {
                     if (!vector.isSet(reverse)) {
-                        System.out.println(i);
+                        out.println(i);
                     }
                 }
 
