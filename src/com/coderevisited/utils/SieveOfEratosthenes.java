@@ -2,6 +2,7 @@ package com.coderevisited.utils;
 
 /**
  * Implementation of Sieve Of Eratosthenes.. Generating prime numbers up to 1 billion
+ * using wheel_2357
  */
 public class SieveOfEratosthenes {
 
@@ -23,20 +24,32 @@ public class SieveOfEratosthenes {
     private void sieve() {
 
         BitVector vector = new BitVector(MEMORY_SIZE);
-        for (int i = 3; i < Math.sqrt(MAX); i = i + 2) {
+        int[] seq = new int[]{2, 4, 2, 4, 6, 2, 6, 4,
+                2, 4, 6, 6, 2, 6, 4, 2,
+                6, 4, 6, 8, 4, 2, 4, 2,
+                4, 8, 6, 4, 6, 2, 4, 6,
+                2, 6, 6, 4, 2, 4, 6, 2,
+                6, 4, 2, 4, 2, 10, 2, 10};
+        int index = 0;
+        for (int i = 11; i < Math.sqrt(MAX); i += seq[index++]) {
             if (!vector.isSet(i >> 1)) {
                 for (int j = (i * i) >> 1; j < MEMORY_SIZE; j = j + i) {
                     vector.setBit(j);
                 }
-
             }
+            if (index == 48)
+                index = 0;
+
         }
 
-        int count = 1;
-        for (int i = 3; i < MAX; i = i + 2) {
+        int count = 3;
+        index = 0;
+        for (int i = 11; i < MAX; i += seq[index++]) {
             if (!vector.isSet(i >> 1)) {
                 count++;
             }
+            if (index == 48)
+                index = 0;
         }
         System.out.println(count);
     }
