@@ -1,118 +1,94 @@
 package com.hackerearth;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Generate as many distinct primes P such that reverse (P) is also prime and is not equal to P.
  */
 public class EmirpGenerator {
 
-    private static final int limit = 400000000;
-    private static int[] reverse = new int[400000000];
-    private static boolean[] primes = new boolean[400000000];
+    private static final int MAX = 1000000000;
 
 
     public static void main(String[] args) {
 
-        EmirpGenerator generator = new EmirpGenerator();
         long start = System.nanoTime();
-        generator.sieve();
+
+        EmirpGenerator emirpGenerator = new EmirpGenerator();
+        emirpGenerator.sieve();
+
         System.out.println((double) (System.nanoTime() - start) / 1000000000.0);
+
+    }
+
+    private static int reverse(int number) {
+        int reverseNumber = 0;
+        while (number != 0) {
+            int lastDigit = number % 10;
+            number = number / 10;
+            reverseNumber = reverseNumber * 10 + lastDigit;
+        }
+        return reverseNumber;
     }
 
     private void sieve() {
 
-        int[] seq = new int[]{4, 2};
-        int upperX = (int) Math.sqrt(limit / 4) + 1;
+        BitVector vector = new BitVector(MAX);
+        int[] seq = new int[]{2, 4, 2, 4, 6, 2, 6, 4,
+                2, 4, 6, 6, 2, 6, 4, 2,
+                6, 4, 6, 8, 4, 2, 4, 2,
+                4, 8, 6, 4, 6, 2, 4, 6,
+                2, 6, 6, 4, 2, 4, 6, 2,
+                6, 4, 2, 4, 2, 10, 2, 10};
+        int index = 0;
+        for (int i = 11; i < Math.sqrt(MAX); i += seq[index++]) {
+            if (!vector.isSet(i)) {
+                int index2 = index;
+                for (int j = i * i; j < MAX; j = j + seq[index2++] * i) {
+                    vector.setBit(j);
+                    if (index2 == 48)
+                        index2 = 0;
+                }
 
-        for (int x = 1; x < upperX; x++) {
-            int k1 = 4 * x * x;
-            if (x % 3 == 0) {
-                int index = 0;
-                for (int y = 1; y < Math.sqrt(limit - k1); y += seq[index++ & 1]) {
-                    int n = k1 + y * y;
-                    primes[n] = !primes[n];
-                }
-            } else {
-                for (int y = 1; y < Math.sqrt(limit - k1); y = y + 2) {
-                    int n = k1 + y * y;
-                    primes[n] = !primes[n];
-                }
             }
-        }
+            if (index == 48)
+                index = 0;
 
-        upperX = (int) Math.sqrt(limit / 3) + 1;
-
-        for (int x = 1; x < upperX; x = x + 2) {
-            int index = 0;
-            int k1 = 3 * x * x;
-            for (int y = 2; y < Math.sqrt(limit - k1); y += seq[++index & 1]) {
-                int n = k1 + y * y;
-                primes[n] = !primes[n];
-            }
-        }
-
-        upperX = (int) Math.sqrt(limit) + 1;
-
-        for (int x = 1; x < upperX; x++) {
-            int k1 = 3 * x * x;
-            // if x is odd, values for y = 1, 5, 7 ...
-            if ((x & 1) == 0) {
-                int index = 1;
-                for (int y = 1; y < x; y += seq[(++index & 1)]) {
-                    int n = k1 - y * y;
-                    if (n <= limit) primes[n] = !primes[n];
-                }
-            } else {
-                int index = 0;
-                //if x is even, y values are 2, 4, 8, 10..
-                for (int y = 2; y < x; y += seq[(++index & 1)]) {
-                    int n = k1 - y * y;
-                    if (n <= limit) primes[n] = !primes[n];
-                }
-            }
-        }
-
-        for (int i = 5; i < Math.sqrt(limit); i++) {
-            if (primes[i]) {
-                for (int k = i * i; k < limit; k += i * i) {
-                    primes[k] = false;
-                }
-            }
         }
 
 
-        Set<Integer> emirps = new HashSet<Integer>(1000000);
-        for (int i = 13; i < limit; i++) {
-            if (primes[i]) {
+        index = 0;
+        for (int i = 11; i < MAX; i += seq[index++]) {
+            if (!vector.isSet(i)) {
                 int reverse = reverse(i);
-                if (reverse < limit && primes[reverse] && !emirps.contains(reverse)) {
-                    emirps.add(i);
+                if ((reverse & 1) == 1 && reverse < MAX && i < reverse && (reverse & 3) != 0 && reverse % 5 != 0 && reverse % 7 != 0) {
+                    if (!vector.isSet(reverse)) {
+                        System.out.println(i);
+                    }
                 }
+
             }
+            if (index == 48)
+                index = 0;
         }
-        System.out.println(emirps.size());
-//        for (int i : emirps) {
-//            System.out.println(i);
-//        }
     }
 
-    private int reverse(int number) {
+    private class BitVector {
 
-        int orignum = number;
+        private int[] bitArray;
 
-        if (reverse[number] == 0) {
-            int reverseNumber = 0;
-            while (number != 0) {
-                int lastDigit = number % 10;
-                number = number / 10;
-                reverseNumber = reverseNumber * 10 + lastDigit;
-            }
-            reverse[orignum] = reverseNumber;
-            if (reverseNumber < limit)
-                reverse[reverseNumber] = orignum;
+        public BitVector(long MAX) {
+            bitArray = new int[(int) (MAX >> 6) + 1];
         }
-        return reverse[orignum];
+
+        public void setBit(long i) {
+            int index = (int) (i >> 6);
+            int bit = (int) (i >> 1) & 31;
+            bitArray[index] = (bitArray[index]) | (1 << bit);
+        }
+
+        public boolean isSet(long i) {
+            int index = (int) (i >> 6);
+            int bit = (int) (i >> 1) & 31;
+            return ((bitArray[index]) & (1 << bit)) != 0;
+        }
     }
 }
