@@ -20,6 +20,8 @@ public class Comrades {
             Arrays.fill(array, -1);
             for (int j = 0; j < length; j++) {
                 int k = scanner.nextInt();
+                if (k == 0)
+                    height[j] = 0;
                 array[j] = k - 1;
             }
             find();
@@ -38,19 +40,19 @@ public class Comrades {
     private static int findHeight(int i) {
 
         Stack<Integer> stack = new Stack<Integer>();
-
-        stack.push(i);
+        int index = i;
+        int h = height[i];
+        while (h == -1) {
+            stack.push(i);
+            i = array[i];
+            h = height[i];
+        }
 
         while (!stack.isEmpty()) {
             int k = stack.pop();
-            if (height[k] != -1)
-                height[i] += height[k];
-            else if (array[k] != -1) {
-                stack.push(array[k]);
-                height[i]++;
-            }
+            height[k] = ++h;
         }
 
-        return height[i];
+        return height[index];
     }
 }
