@@ -1,74 +1,56 @@
 package com.hackerearth;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Comrades {
 
-    private int[] array;
-    private int rootindex;
-
-    public Comrades(int N) {
-        array = new int[N + 1];
-    }
+    private static final int MAX = 100000;
+    private static int[] array = new int[MAX];
+    private static int[] height = new int[MAX];
+    private static int length;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int T = scanner.nextInt();
         for (int i = 0; i < T; i++) {
-            int N = scanner.nextInt();
-            Comrades comrades = new Comrades(N);
-            for (int j = 1; j <= N; j++) {
+            length = scanner.nextInt();
+            Arrays.fill(height, -1);
+            Arrays.fill(array, -1);
+            for (int j = 0; j < length; j++) {
                 int k = scanner.nextInt();
-                comrades.connect(j, k);
+                array[j] = k - 1;
             }
-            comrades.search();
+            find();
         }
     }
 
-    private void search() {
-        int handshakes = 0;
-        int fistBumps = 0;
-        for (int i = 1; i < array.length; i++) {
-            for (int j = i + 1; j < array.length; j++) {
-                int c1 = array[i];
-                int c2 = array[j];
-
-                if (c1 == c2) {
-                    fistBumps++;
-                    continue;
-                }
-
-                boolean found = false;
-
-                while (c1 != 0) {
-                    if (c1 == j) {
-                        found = true;
-                        handshakes++;
-                        break;
-                    }
-                    c1 = array[c1];
-                }
-
-                while (!found && c2 != 0) {
-                    if (i == c2) {
-                        found = true;
-                        handshakes++;
-                        break;
-                    }
-                    c2 = array[c2];
-                }
-
-                if (!found)
-                    fistBumps++;
-            }
+    private static void find() {
+        long sumOfHeights = 0;
+        for (int i = 0; i < length; i++) {
+            sumOfHeights += findHeight(i);
         }
-
-        System.out.println(handshakes + " " + fistBumps);
+        long fistBumps = ((long) (length) * (length - 1) / 2) - sumOfHeights;
+        System.out.println(sumOfHeights + " " + fistBumps);
     }
 
-    private void connect(int j, int k) {
-        array[j] = k;
-        if (k == 0)
-            rootindex = j;
+    private static int findHeight(int i) {
+
+
+        if (height[i] != -1) {
+            return height[i];
+        }
+
+        if (array[i] == -1)
+            return 0;
+
+        if (i != array[i]) {
+            height[i] = 1 + findHeight(array[i]);
+            return height[i];
+        }
+
+        return 0;
+
+
     }
 }
