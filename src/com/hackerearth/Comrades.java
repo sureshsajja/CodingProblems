@@ -2,6 +2,7 @@ package com.hackerearth;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Comrades {
 
@@ -30,39 +31,26 @@ public class Comrades {
         for (int i = 0; i < length; i++) {
             sumOfHeights += findHeight(i);
         }
-        for (int i = 0; i < length; i++) {
-            System.out.println(array[i]);
-            System.out.println(height[i]);
-        }
         long fistBumps = ((long) (length) * (length - 1) / 2) - sumOfHeights;
         System.out.println(sumOfHeights + " " + fistBumps);
     }
 
     private static int findHeight(int i) {
 
-        if (i < 0)
-            return 0;
+        Stack<Integer> stack = new Stack<Integer>();
 
-        if (height[i] != -1) {
-            return height[i];
-        }
+        stack.push(i);
 
-        if (array[i] == -1) {
-            if (height[i] == -1) {
-                height[i] = 0;
+        while (!stack.isEmpty()) {
+            int k = stack.pop();
+            if (height[k] != -1)
+                height[i] += height[k];
+            else if (array[k] != -1) {
+                stack.push(array[k]);
+                height[i]++;
             }
-            return 0;
         }
 
-        if (i != array[i]) {
-            int n = array[i];
-            array[i] = -1;
-            height[i] = 1 + findHeight(n);
-            return height[i];
-        }
-
-        return 0;
-
-
+        return height[i];
     }
 }
