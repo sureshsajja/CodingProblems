@@ -1,15 +1,16 @@
 package com.coderevisited.utils;
 
 /**
- * Implementation of Sieve Of Eratosthenes.. Generating prime numbers up to 1 billion
- * using wheel_2357
+ * Implementation of Sieve Of Eratosthenes.. Generating prime numbers up to 1 billion using wheel_2357
  */
-public class SieveOfEratosthenes {
+public class SieveOfEratosthenes
+{
 
     private static final int MAX = 1000000000;
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
 
         long start = System.nanoTime();
 
@@ -20,7 +21,8 @@ public class SieveOfEratosthenes {
 
     }
 
-    private void sieve() {
+    private void sieve()
+    {
 
         BitVector vector = new BitVector(MAX);
         int[] seq = new int[]{2, 4, 2, 4, 6, 2, 6, 4,
@@ -35,13 +37,15 @@ public class SieveOfEratosthenes {
                 int index2 = index;
                 for (int j = i * i; j < MAX; j = j + seq[index2++] * i) {
                     vector.setBit(j);
-                    if (index2 == 48)
+                    if (index2 == 48) {
                         index2 = 0;
+                    }
                 }
 
             }
-            if (index == 48)
+            if (index == 48) {
                 index = 0;
+            }
 
         }
 
@@ -51,27 +55,32 @@ public class SieveOfEratosthenes {
             if (!vector.isSet(i)) {
                 count++;
             }
-            if (index == 48)
+            if (index == 48) {
                 index = 0;
+            }
         }
         System.out.println(count);
     }
 
-    private class BitVector {
+    private class BitVector
+    {
 
         private int[] bitArray;
 
-        public BitVector(long MAX) {
+        public BitVector(long MAX)
+        {
             bitArray = new int[(int) (MAX >> 6) + 1];
         }
 
-        public void setBit(long i) {
+        public void setBit(long i)
+        {
             int index = (int) (i >> 6);
             int bit = (int) (i >> 1) & 31;
             bitArray[index] = (bitArray[index]) | (1 << bit);
         }
 
-        public boolean isSet(long i) {
+        public boolean isSet(long i)
+        {
             int index = (int) (i >> 6);
             int bit = (int) (i >> 1) & 31;
             return ((bitArray[index]) & (1 << bit)) != 0;

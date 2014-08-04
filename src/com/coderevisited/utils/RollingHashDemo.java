@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class RollingHashDemo {
+public class RollingHashDemo
+{
 
     private static long longRandomPrime = BigInteger.probablePrime(31, new Random()).longValue();
     private static Map<Character, Long> primes = new HashMap<Character, Long>();
@@ -41,7 +42,8 @@ public class RollingHashDemo {
         primes.put('z', 103L);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         String source = "thisisexampleofrollinghash";
         String pattern = "example";
         long hash = findHash(pattern, 7);
@@ -60,11 +62,13 @@ public class RollingHashDemo {
             System.out.println("Adding char : " + source.charAt(i));
             sourceHash = (sourceHash * primes.get(source.charAt(i))) % longRandomPrime;
             int offset = i - pattern.length() + 1;
-            System.out.println("Hash of \"" + source.substring(offset, pattern.length() + offset) + "\" : " + sourceHash);
+            System.out
+                    .println("Hash of \"" + source.substring(offset, pattern.length() + offset) + "\" : " + sourceHash);
         }
     }
 
-    private static long findHash(String source, int length) {
+    private static long findHash(String source, int length)
+    {
         long h = 1;
         for (int j = 0; j < length; j++) {
             h = h * primes.get(source.charAt(j)) % longRandomPrime;

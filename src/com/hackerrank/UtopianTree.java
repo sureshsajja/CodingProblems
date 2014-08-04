@@ -3,23 +3,18 @@ package com.hackerrank;
 import java.util.Scanner;
 
 /**
- * The Utopian tree goes through 2 cycles of growth every year.
- * The first growth cycle of the tree is during the monsoon season when it doubles in height.
- * The second growth cycle is during the summer when it increases in height by 1 meter.
- * If a new Utopian tree sapling of height 1 meter is planted just before the onset of the monsoon season,
- * can you find the height of the tree after N cycles?
+ * The Utopian tree goes through 2 cycles of growth every year. The first growth cycle of the tree is during the monsoon
+ * season when it doubles in height. The second growth cycle is during the summer when it increases in height by 1
+ * meter. If a new Utopian tree sapling of height 1 meter is planted just before the onset of the monsoon season, can
+ * you find the height of the tree after N cycles?
  * <p/>
- * input:
- * 2
- * 0
- * 1
+ * input: 2 0 1
  * <p/>
- * output:
- * 1
- * 2
+ * output: 1 2
  */
 
-public class UtopianTree {
+public class UtopianTree
+{
 
     private static int[] cycles = new int[10000];
 
@@ -30,7 +25,8 @@ public class UtopianTree {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         Scanner scanner = new Scanner(System.in);
         int K = scanner.nextInt();
 
@@ -39,14 +35,16 @@ public class UtopianTree {
         }
     }
 
-    private static int getLengthAfterNCycles(int N) {
+    private static int getLengthAfterNCycles(int N)
+    {
 
         if (N == 0) {
             cycles[N] = 1;
         }
 
-        if (cycles[N] != -1)
+        if (cycles[N] != -1) {
             return cycles[N];
+        }
 
         int prev = getLengthAfterNCycles(N - 1);
 

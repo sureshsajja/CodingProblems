@@ -3,15 +3,18 @@ package com.coderevisited.utils;
 import java.math.BigInteger;
 import java.util.Random;
 
-public class ModInverseCalculator {
+public class ModInverseCalculator
+{
 
     private BigInteger largePrime;
 
-    public ModInverseCalculator(long largePrime) {
+    public ModInverseCalculator(long largePrime)
+    {
         this.largePrime = BigInteger.valueOf(largePrime);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
 
         BigInteger largePrime = BigInteger.probablePrime(61, new Random());
         ModInverseCalculator calc = new ModInverseCalculator(largePrime.longValue());
@@ -23,7 +26,8 @@ public class ModInverseCalculator {
     }
 
 
-    public long modInverse(long value) {
+    public long modInverse(long value)
+    {
         BigInteger inverse = BigInteger.valueOf(value).modInverse(largePrime);
         return inverse.longValue();
 

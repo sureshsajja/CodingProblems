@@ -5,25 +5,19 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * Given a string, find whether it has any permutation of another string. For example, given "abcdefg" and "ba",
- * it should return true, because "abcdefg" has substring "ab", which is a permutation of "ba".
- *
- * Algorithm
- * 1. Calculate 'PH' as Pattern Hash using prime code for each character
- * 2. populate histogram of characters in the pattern
- * 3. calculate 'SH' as Hash of source string up to length of pattern
- * 4. if ('PH' != 'SH') Remove leading digit, add trailing digit
- * 5. if ('PH' == 'SH') check for exact match using histogram
- *
- * input:
- * 1
- * hack
- * indiahacks
- *
- * output:
- * YES
+ * Given a string, find whether it has any permutation of another string. For example, given "abcdefg" and "ba", it
+ * should return true, because "abcdefg" has substring "ab", which is a permutation of "ba".
+ * <p/>
+ * Algorithm 1. Calculate 'PH' as Pattern Hash using prime code for each character 2. populate histogram of characters
+ * in the pattern 3. calculate 'SH' as Hash of source string up to length of pattern 4. if ('PH' != 'SH') Remove leading
+ * digit, add trailing digit 5. if ('PH' == 'SH') check for exact match using histogram
+ * <p/>
+ * input: 1 hack indiahacks
+ * <p/>
+ * output: YES
  */
-public class AnagramSearch {
+public class AnagramSearch
+{
 
     private static Map<Character, Long> primes = new HashMap<Character, Long>();
     //Prime number generated from BigInteger.probablePrime(31, new Random())
@@ -89,7 +83,8 @@ public class AnagramSearch {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
 
         Scanner scanner = new Scanner(System.in);
         int K = scanner.nextInt();
@@ -109,12 +104,14 @@ public class AnagramSearch {
             long sourceHash = hash(source, l);
 
             boolean found = false;
-            if ((patternHash == sourceHash) && check(sourceChars, 0, l, new HashMap<Character, Integer>(charMap)))
+            if ((patternHash == sourceHash) && check(sourceChars, 0, l, new HashMap<Character, Integer>(charMap))) {
                 found = true;
+            }
 
             for (int j = l; j < source.length(); j++) {
-                if (found)
+                if (found) {
                     break;
+                }
 
                 // Remove leading digit, add trailing digit, check for match.
                 sourceHash = (sourceHash * inverse.get(source.charAt(j - l))) % longRandomPrime;
@@ -122,8 +119,10 @@ public class AnagramSearch {
 
                 // match
                 int offset = j - l + 1;
-                if ((patternHash == sourceHash) && check(sourceChars, offset, l, new HashMap<Character, Integer>(charMap)))
+                if ((patternHash == sourceHash) &&
+                        check(sourceChars, offset, l, new HashMap<Character, Integer>(charMap))) {
                     found = true;
+                }
             }
 
             if (found) {
@@ -134,7 +133,8 @@ public class AnagramSearch {
         }
     }
 
-    private static long hash(String source, int length) {
+    private static long hash(String source, int length)
+    {
         long h = 1;
         for (int j = 0; j < length; j++) {
             h = h * primes.get(source.charAt(j)) % longRandomPrime;
@@ -142,27 +142,31 @@ public class AnagramSearch {
         return h;
     }
 
-    private static boolean check(char[] sourceChars, int offset, int length, Map<Character, Integer> charMap) {
+    private static boolean check(char[] sourceChars, int offset, int length, Map<Character, Integer> charMap)
+    {
 
         for (int i = 0; i < length; i++) {
             char c = sourceChars[offset + i];
 
             if (charMap.containsKey(c)) {
                 charMap.put(c, charMap.get(c) - 1);
-                if (charMap.get(c) == 0)
+                if (charMap.get(c) == 0) {
                     charMap.remove(c);
+                }
 
                 if (charMap.size() == 0) {
                     return true;
                 }
-            } else
+            } else {
                 break;
+            }
         }
         return false;
 
     }
 
-    private static void populatePattern(char[] pattern, Map<Character, Integer> charMap) {
+    private static void populatePattern(char[] pattern, Map<Character, Integer> charMap)
+    {
         for (char c : pattern) {
             if (charMap.get(c) == null) {
                 charMap.put(c, 1);

@@ -5,11 +5,13 @@ import java.util.Scanner;
 /**
  * Given A and B, count the numbers N such that A ≤ N ≤ B and N is a palindrome.
  */
-public class PalindromicNumbers {
+public class PalindromicNumbers
+{
 
     private static int[] palindrome = new int[100001];
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
 
         Scanner scanner = new Scanner(System.in);
         int T = scanner.nextInt();
@@ -20,14 +22,16 @@ public class PalindromicNumbers {
 
             int count = 0;
             for (int j = A; j <= B; j++) {
-                if (isPalindrome(j))
+                if (isPalindrome(j)) {
                     count++;
+                }
             }
             System.out.println(count);
         }
     }
 
-    private static boolean isPalindrome(int j) {
+    private static boolean isPalindrome(int j)
+    {
 
         int reverseNumber = 0;
         int origNumber = j;

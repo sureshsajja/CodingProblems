@@ -1,26 +1,17 @@
 package com.hackerearth;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
- * Given an even number check if it can be represented as a sum of two primes
- * INPUT
- * =====
- * 2
- * 4
- * 8
+ * Given an even number check if it can be represented as a sum of two primes INPUT ===== 2 4 8
  * <p/>
- * OUTPUT
- * ======
- * Can be represented as sum of two primes :2+2
- * Can be represented as sum of two primes :3+5
+ * OUTPUT ====== Can be represented as sum of two primes :2+2 Can be represented as sum of two primes :3+5
  */
-public class SumAsPrimeNumbers {
+public class SumAsPrimeNumbers
+{
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         Integer[] primes = findPrimes();
 
         Scanner scanner = new Scanner(System.in);
@@ -51,7 +42,8 @@ public class SumAsPrimeNumbers {
         }
     }
 
-    private static Integer[] findPrimes() {
+    private static Integer[] findPrimes()
+    {
 
         int MAX = 100000;
         BitVector vector = new BitVector(MAX);
@@ -67,13 +59,15 @@ public class SumAsPrimeNumbers {
                 int index2 = index;
                 for (int j = i * i; j < MAX; j = j + seq[index2++] * i) {
                     vector.setBit(j);
-                    if (index2 == 48)
+                    if (index2 == 48) {
                         index2 = 0;
+                    }
                 }
 
             }
-            if (index == 48)
+            if (index == 48) {
                 index = 0;
+            }
 
         }
 
@@ -89,8 +83,9 @@ public class SumAsPrimeNumbers {
             if (!vector.isSet(i)) {
                 primes.add(i);
             }
-            if (index == 48)
+            if (index == 48) {
                 index = 0;
+            }
         }
         Integer[] array = new Integer[primes.size()];
         primes.toArray(array);
@@ -98,21 +93,25 @@ public class SumAsPrimeNumbers {
 
     }
 
-    private static class BitVector {
+    private static class BitVector
+    {
 
         private int[] bitArray;
 
-        public BitVector(long MAX) {
+        public BitVector(long MAX)
+        {
             bitArray = new int[(int) (MAX >> 6) + 1];
         }
 
-        public void setBit(long i) {
+        public void setBit(long i)
+        {
             int index = (int) (i >> 6);
             int bit = (int) (i >> 1) & 31;
             bitArray[index] = (bitArray[index]) | (1 << bit);
         }
 
-        public boolean isSet(long i) {
+        public boolean isSet(long i)
+        {
             int index = (int) (i >> 6);
             int bit = (int) (i >> 1) & 31;
             return ((bitArray[index]) & (1 << bit)) != 0;

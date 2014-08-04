@@ -7,12 +7,14 @@ import java.io.PrintWriter;
 /**
  * Generate as many distinct primes P such that reverse (P) is also prime and is not equal to P.
  */
-public class EmirpGenerator {
+public class EmirpGenerator
+{
 
     private static final int MAX = 1000000000;
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 
         long start = System.nanoTime();
@@ -25,7 +27,8 @@ public class EmirpGenerator {
 
     }
 
-    private static int reverse(int number) {
+    private static int reverse(int number)
+    {
         int reverseNumber = 0;
         while (number != 0) {
             int lastDigit = number % 10;
@@ -35,7 +38,8 @@ public class EmirpGenerator {
         return reverseNumber;
     }
 
-    private void sieve(PrintWriter out) {
+    private void sieve(PrintWriter out)
+    {
 
         BitVector vector = new BitVector(MAX);
         int[] seq = new int[]{2, 4, 2, 4, 6, 2, 6, 4,
@@ -50,13 +54,15 @@ public class EmirpGenerator {
                 int index2 = index;
                 for (int j = i * i; j < MAX; j = j + seq[index2++] * i) {
                     vector.setBit(j);
-                    if (index2 == 48)
+                    if (index2 == 48) {
                         index2 = 0;
+                    }
                 }
 
             }
-            if (index == 48)
+            if (index == 48) {
                 index = 0;
+            }
 
         }
 
@@ -65,33 +71,39 @@ public class EmirpGenerator {
         for (int i = 11; i < MAX; i += seq[index++]) {
             if (!vector.isSet(i)) {
                 int reverse = reverse(i);
-                if ((reverse & 1) == 1 && reverse < MAX && i < reverse && (reverse & 3) != 0 && reverse % 5 != 0 && reverse % 7 != 0) {
+                if ((reverse & 1) == 1 && reverse < MAX && i < reverse && (reverse & 3) != 0 && reverse % 5 != 0 &&
+                        reverse % 7 != 0) {
                     if (!vector.isSet(reverse)) {
                         out.println(i);
                     }
                 }
 
             }
-            if (index == 48)
+            if (index == 48) {
                 index = 0;
+            }
         }
     }
 
-    private class BitVector {
+    private class BitVector
+    {
 
         private int[] bitArray;
 
-        public BitVector(long MAX) {
+        public BitVector(long MAX)
+        {
             bitArray = new int[(int) (MAX >> 6) + 1];
         }
 
-        public void setBit(long i) {
+        public void setBit(long i)
+        {
             int index = (int) (i >> 6);
             int bit = (int) (i >> 1) & 31;
             bitArray[index] = (bitArray[index]) | (1 << bit);
         }
 
-        public boolean isSet(long i) {
+        public boolean isSet(long i)
+        {
             int index = (int) (i >> 6);
             int bit = (int) (i >> 1) & 31;
             return ((bitArray[index]) & (1 << bit)) != 0;
