@@ -2,11 +2,13 @@ package com.hackerearth;
 
 import java.util.Scanner;
 
-public class TimeOverLap {
+public class TimeOverLap
+{
 
     private static int[] day = new int[24 * 60];
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         Scanner scanner = new Scanner(System.in);
         int T = scanner.nextInt();
         boolean overlap = false;

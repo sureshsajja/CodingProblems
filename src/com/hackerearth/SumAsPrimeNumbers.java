@@ -1,6 +1,9 @@
 package com.hackerearth;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Given an even number check if it can be represented as a sum of two primes INPUT ===== 2 4 8
