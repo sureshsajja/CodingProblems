@@ -79,9 +79,9 @@ public class EchoClient
             PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             System.out.println("Enter message to server");
-            System.out.println("Enter $ to quit client:");
+            System.out.println("Enter # to quit client:");
             String userInput = stdIn.readLine();
-            while (!"$".equalsIgnoreCase(userInput)) {
+            while (!"#".equalsIgnoreCase(userInput)) {
                 writer.println(userInput);
                 System.out.println("Echo from server: " + reader.readLine());
                 userInput = stdIn.readLine();
