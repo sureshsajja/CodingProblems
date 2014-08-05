@@ -103,33 +103,9 @@ public class EchoClient
 
     private static enum State
     {
-        INIT
-                {
-                    public String toString()
-                    {
-                        return "INIT";
-                    }
-                },
-        CONNECTED
-                {
-                    public String toString()
-                    {
-                        return "CONNECTED";
-                    }
-                },
-        SUSPENDED
-                {
-                    public String toString()
-                    {
-                        return "SUSPENDED";
-                    }
-                },
+        INIT,
+        CONNECTED,
+        SUSPENDED,
         CLOSED
-                {
-                    public String toString()
-                    {
-                        return "CLOSED";
-                    }
-                }
     }
 }
