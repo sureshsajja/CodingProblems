@@ -12,9 +12,12 @@ import java.util.Scanner;
  * in the pattern 3. calculate 'SH' as Hash of source string up to length of pattern 4. if ('PH' != 'SH') Remove leading
  * digit, add trailing digit 5. if ('PH' == 'SH') check for exact match using histogram
  * <p/>
- * input: 1 hack indiahacks
+ * input:
+ * 1
+ * hack indiahacks
  * <p/>
- * output: YES
+ * output:
+ * YES
  */
 public class AnagramSearch
 {

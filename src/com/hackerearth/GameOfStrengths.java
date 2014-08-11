@@ -11,15 +11,29 @@ import java.util.Scanner;
  * strength among N boxes. Since the Overall Power could be a very large number,output the number modulus
  * 10^9+7(1000000007).
  * <p/>
- * Input ===== First line of the input contains the number of test cases T. It is followed by T test cases. Each test
+ * Input
+ * =====
+ * First line of the input contains the number of test cases T. It is followed by T test cases. Each test
  * case has 2 lines. First line contains the number of boxes N. It is followed by a line containing N elements where ith
  * element is the strength of Andrew's ith box.
  * <p/>
- * Output ====== For each test case, output a single number, which is the Overall Power for that test case.
+ * Output
+ * ======
+ * For each test case, output a single number, which is the Overall Power for that test case.
  * <p/>
- * Constraints =========== 1<=T<= 10 2<=N<=10^5 0<=A[i]<=10^9
+ * Constraints
+ * ===========
+ * 1<=T<= 10
+ * 2<=N<=10^5
+ * 0<=A[i]<=10^9
  * <p/>
- * Sample Input ============ 2 2 1 2 5 4 5 3 1 2
+ * Sample Input
+ * ============
+ * 2
+ * 2
+ * 1 2
+ * 5
+ * 4 5 3 1 2
  * <p/>
  * Output ====== 2 100
  */
