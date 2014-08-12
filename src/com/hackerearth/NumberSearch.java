@@ -5,9 +5,13 @@ import java.util.Scanner;
 /**
  * Check if a number N is divisible by given number A or if N contains A in part
  * <p/>
- * Input: ====== 3 120 121 231
+ * Input:
+ * ======
+ * 3 120 121 231
  * <p/>
- * Output: ====== The streak lives still in our heart! The streak is broken! The streak is broken!
+ * Output:
+ * ======
+ * The streak lives still in our heart! The streak is broken! The streak is broken!
  */
 public class NumberSearch
 {

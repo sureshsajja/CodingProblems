@@ -6,9 +6,14 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Given an even number check if it can be represented as a sum of two primes INPUT ===== 2 4 8
+ * Given an even number check if it can be represented as a sum of two primes
+ * INPUT
+ * =====
+ * 2 4 8
  * <p/>
- * OUTPUT ====== Can be represented as sum of two primes :2+2 Can be represented as sum of two primes :3+5
+ * OUTPUT
+ * ======
+ * Can be represented as sum of two primes :2+2 Can be represented as sum of two primes :3+5
  */
 public class SumAsPrimeNumbers
 {
