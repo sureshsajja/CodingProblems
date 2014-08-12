@@ -1,84 +1,106 @@
-
 package com.hackerrank;
 
-import java.util.Collections;
+import java.io.*;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.TreeSet;
 
 
 public class BlackBox
 {
+    private static int[] mathPow = new int[]{1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216, 33554432, 67108864, 134217728, 268435456, 536870912, 1073741824};
+    private Set<Integer> list;
 
-    private TreeSet<Integer> set;
+    private static PrintWriter pw;
+
+    static {
+        pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+    }
 
     public BlackBox()
     {
-        set = new TreeSet<Integer>(Collections.reverseOrder());
+        list = new TreeSet<Integer>();
 
     }
 
     public static void main(String[] args)
     {
-        Scanner scanner = new Scanner(System.in);
+        long startMs = System.currentTimeMillis();
+        Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(System.in)));
         int T = scanner.nextInt();
         BlackBox box = new BlackBox();
         for (int t = 0; t < T; t++) {
             int i = scanner.nextInt();
             if (i < 0) {
-                box.remove(Math.abs(i));
+                box.remove(-1 * i);
             } else {
                 box.add(i);
             }
-            System.out.println(box.findMaxXOR());
+            pw.println(box.findMaxXOR());
+            // box.findMaxXOR();
         }
 
-    }
+        long time = (System.currentTimeMillis() - startMs) / 1000;
+        pw.println(time);
+        pw.close();
 
-    private static boolean ifNthBitSet(int A, int N)
-    {
-        return (A & (1 << N)) != 0;
     }
 
     public void add(Integer e)
     {
-        set.add(e);
+        list.add(e);
     }
 
     public void remove(Integer e)
     {
-        set.remove(e);
+        list.remove(e);
     }
 
-    public int findMaxXOR()
+    private int findMaxXOR()
     {
-        Integer[] array = new Integer[set.size()];
-        array = set.toArray(array);
-        int result = 0;
-        if (array.length > 0) {
-            int firstPos = Integer.numberOfLeadingZeros(array[0]);
-            for (int i = 0; i < array.length; i++) {
-                if (!ifNthBitSet(array[i], 31 - firstPos - i)) {
-                    for (int k = i + 1; k < array.length; k++) {
-                        if (ifNthBitSet(array[k], 31 - firstPos - i)) {
-                            int temp = array[k];
-                            array[k] = array[i];
-                            array[i] = temp;
-                            break;
-                        }
-                    }
-                }
-                int pow = (int) Math.pow(2, 31 - firstPos - i);
-                for (int j = i + 1; j < array.length && array[j] >= pow; j++) {
-                    array[j] = array[j] ^ array[i];
-                }
-            }
-            for (Integer anArray : array) {
-                int tempResult = result ^ anArray;
-                result = result > tempResult ? result : tempResult;
-            }
+
+        int[] array = new int[list.size()];
+        Iterator<Integer> itr = list.iterator();
+        for (int i = 0; i < array.length; i++) {
+            array[array.length - 1 - i] = itr.next();
         }
+
+        if (array.length == 0)
+            return 0;
+
+        int bitPos = 0;
+
+        while (mathPow[bitPos] <= array[0])
+            bitPos++;
+
+        bitPos--;
+
+        for (int p = bitPos, index = 0; p >= 0; p--) {
+
+            int pow = mathPow[p];
+            int k = index;
+            while (k < array.length && (array[k] & pow) == 0) k++;
+            if (k >= array.length)
+                continue;
+
+            int temp = array[k];
+            array[k] = array[index];
+            array[index] = temp;
+
+            for (int j = 0; j < array.length; j++) {
+                if (j != index && (array[j] & pow) != 0)
+                    array[j] = array[j] ^ array[index];
+            }
+            index++;
+        }
+
+        int result = 0;
+        for (Integer anArray : array) {
+            result = result ^ anArray;
+        }
+
         return result;
+
     }
-
-
 }
