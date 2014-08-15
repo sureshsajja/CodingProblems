@@ -69,9 +69,4 @@ public class MaximizeXOR
 
     }
 
-    private static boolean ifNthBitSet(int A, int N)
-    {
-        return (A & mathPow[N]) != 0;
-    }
-
 }
