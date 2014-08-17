@@ -5,6 +5,9 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * http://stackoverflow.com/a/11156949
+ */
 public class AaryanAndTheMagicalNumbers
 {
     private static long[] table = new long[19];
