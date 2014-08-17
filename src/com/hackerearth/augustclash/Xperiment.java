@@ -5,15 +5,17 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-//TODO verify this
+/**
+ * 1. Numbers from N to 2*N-1
+ * 2. First N primes
+ * 3. Output whose sum is less.
+ */
+
 public class Xperiment
 {
-    private static final int MAX = 50000;
-    private static int[] primes = new int[MAX];
 
     public static void main(String[] args)
     {
-
 
         Scanner scanner = new Scanner(System.in);
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
@@ -21,9 +23,8 @@ public class Xperiment
         int T = scanner.nextInt();
         for (int t = 0; t < T; t++) {
             int N = scanner.nextInt();
-            sieve(N);
             for (int i = 0; i < N; i++) {
-                pw.print(primes[i]);
+                pw.print(i + N);
                 pw.print(" ");
             }
             pw.println();
@@ -33,26 +34,6 @@ public class Xperiment
         pw.close();
     }
 
-    private static void sieve(int N)
-    {
-
-        boolean[] vector = new boolean[MAX];
-
-        for (int i = N; i < MAX; i++) {
-            if (!vector[i]) {
-                for (int j = i + i; j < MAX; j = j + i) {
-                    vector[j] = true;
-                }
-            }
-        }
-
-        int count = 0;
-        for (int i = N; i < MAX; i++) {
-            if (!vector[i])
-                primes[count++] = i;
-        }
-
-    }
 
 }
 
