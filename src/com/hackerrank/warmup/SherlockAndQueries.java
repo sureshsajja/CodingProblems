@@ -5,6 +5,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+//TODO optimise this
 public class SherlockAndQueries
 {
     public static void main(String[] args)

@@ -2,6 +2,7 @@ package com.hackerrank;
 
 import java.util.Scanner;
 
+//TODO optimise this
 public class Necklace
 {
     private static int MAX = 10000;
