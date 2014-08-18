@@ -5,16 +5,14 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-//TODO optimise this
-public class Necklace
+public class NecklaceBruteForce
 {
-    private static int MAX = 1000;
-    private static long[][] matrix = new long[MAX + 1][MAX + 1];
+    private static int MAX = 10000;
+    private static int[][] matrix = new int[MAX + 1][MAX + 1];
     private static int MOD = 1000000000 + 7;
 
     public static void main(String[] args)
     {
-
         Scanner scanner = new Scanner(System.in);
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
         int T = scanner.nextInt();
@@ -50,17 +48,19 @@ public class Necklace
             return matrix[n][k];
         }
 
-        if (k == 0 || n == 0 || n == k) {
-            matrix[n][k] = 1;
-            return 1;
+        for (int i = 0; i <= n; i++) {
+            if (matrix[i][k] == 0) {
+                for (int j = 0; j <= k; j++) {
+                    if (matrix[i][j] == 0) {
+                        if (j == 0 || i == 0 || i == j) {
+                            matrix[i][j] = 1;
+                        } else {
+                            matrix[i][j] = (int) (matrix[i - 1][j - 1] + (long) matrix[i - 1][j]) % MOD;
+                        }
+                    }
+                }
+            }
         }
-
-        matrix[n - 1][k - 1] = calculateValue(n - 1, k - 1);
-        matrix[n - 1][k] = calculateValue(n - 1, k);
-
-        matrix[n][k] = (matrix[n - 1][k - 1] + matrix[n - 1][k]) % MOD;
         return matrix[n][k];
-
-
     }
 }
