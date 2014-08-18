@@ -5,6 +5,9 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * 1+nc1+n-2c2+n-4c3+n-6c4 ... until n>=k
+ */
 public class NecklaceBruteForce
 {
     private static int MAX = 10000;
