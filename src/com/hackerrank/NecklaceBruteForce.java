@@ -28,9 +28,9 @@ public class NecklaceBruteForce
         scanner.close();
     }
 
-    private static long count(int i)
+    private static int count(int i)
     {
-        long result = 1;
+        int result = 1;
         for (int n = i, k = 1; n >= k; n -= 2, k++) {
             int r = k;
             if (k > n / 2) {
@@ -39,12 +39,12 @@ public class NecklaceBruteForce
             if (matrix[n][r] == 0) {
                 calculateValue(n, r);
             }
-            result = (result + matrix[n][r]) % MOD;
+            result = (int) ((result + (long) matrix[n][r]) % MOD);
         }
         return result;
     }
 
-    private static long calculateValue(int n, int k)
+    private static int calculateValue(int n, int k)
     {
 
         if (matrix[n][k] != 0) {
