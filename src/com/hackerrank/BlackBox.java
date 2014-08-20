@@ -1,10 +1,7 @@
 package com.hackerrank;
 
 import java.io.*;
-import java.util.Iterator;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 //TODO Optimise this
 public class BlackBox
@@ -38,7 +35,6 @@ public class BlackBox
                 box.add(i);
             }
             pw.println(box.findMaxXOR());
-            // box.findMaxXOR();
         }
 
         long time = (System.currentTimeMillis() - startMs) / 1000;
@@ -59,7 +55,6 @@ public class BlackBox
 
     private int findMaxXOR()
     {
-
         int[] array = new int[list.size()];
         Iterator<Integer> itr = list.iterator();
         for (int i = 0; i < array.length; i++) {
@@ -101,6 +96,5 @@ public class BlackBox
         }
 
         return result;
-
     }
 }
