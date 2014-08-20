@@ -1,4 +1,4 @@
-package com.hackerrank;
+package com.hackerrank.week8;
 
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;

@@ -1,7 +1,10 @@
-package com.hackerrank;
+package com.hackerrank.week8;
 
 import java.io.*;
-import java.util.*;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 
 //TODO Optimise this
 public class BlackBox
