@@ -24,15 +24,12 @@ public class SansaAndXOR
 
             int result = 0;
             for (int i = 0; i < N; i++) {
-                result ^= array[i];
-                int intermediate = array[i];
-                for (int j = i + 1; j < N; j++) {
-                    intermediate ^= array[j];
-                    result ^= intermediate;
+                int times = (N - i) * (i + 1);
+                if ((times & 1) == 1) {
+                    result = result ^ array[i];
                 }
             }
             pw.println(result);
-
         }
 
 
