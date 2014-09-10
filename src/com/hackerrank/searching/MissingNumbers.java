@@ -3,10 +3,7 @@ package com.hackerrank.searching;
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class MissingNumbers
 {
@@ -32,7 +29,7 @@ public class MissingNumbers
         Arrays.sort(B);
 
         int n = 0, m = 0;
-        Set<Integer> result = new TreeSet<>();
+        Set<Integer> result = new TreeSet<Integer>();
         while (m < M) {
             if (n < N && A[n] == B[m]) {
                 n++;
