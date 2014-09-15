@@ -42,10 +42,14 @@ public class SqrtRMQ
             int min;
 
             if (start % K == 0) {
-                min = matrix[start / K];
+                if (start + K - 1 <= B)
+                    min = matrix[start / K];
+                else {
+                    min = start;
+                }
             } else {
                 min = start;
-                while (++start % K != 0) {
+                while (++start % K != 0 && start <= B) {
                     if (array[start] < array[min]) {
                         min = start;
                     }
