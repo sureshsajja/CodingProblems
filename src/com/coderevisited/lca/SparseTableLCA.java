@@ -7,6 +7,13 @@ import java.util.*;
 
 import com.coderevisited.utils.MathUtils;
 
+/**
+ * INPUT : No of vertices Edges Queries x, y
+ * <p/>
+ * 13 1 2 1 3 1 4 3 5 3 6 3 7 6 8 6 9 7 10 7 11 10 12 10 13 5 1 6 2 7 4 11 5 13 8 9
+ * <p/>
+ * OUTPUT: 1 1 1 3 6
+ */
 public class SparseTableLCA
 {
     private static int logV;
