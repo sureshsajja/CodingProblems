@@ -5,6 +5,9 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * http://www.topcoder.com/tc?d1=tutorials&d2=lowestCommonAncestor&module=Static
+ */
 public class SqrtRMQ
 {
     public static void main(String[] args)
@@ -42,9 +45,9 @@ public class SqrtRMQ
             int min;
 
             if (start % K == 0) {
-                if (start + K - 1 <= B)
+                if (start + K - 1 <= B) {
                     min = matrix[start / K];
-                else {
+                } else {
                     min = start;
                 }
             } else {

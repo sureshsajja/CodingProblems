@@ -5,6 +5,9 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * http://www.topcoder.com/tc?d1=tutorials&d2=lowestCommonAncestor&module=Static
+ */
 public class TrivialRMQ
 {
     public static void main(String[] args)

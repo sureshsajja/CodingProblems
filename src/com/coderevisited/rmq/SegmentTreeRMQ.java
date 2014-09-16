@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 import com.coderevisited.utils.MathUtils;
 
+/**
+ * http://www.topcoder.com/tc?d1=tutorials&d2=lowestCommonAncestor&module=Static
+ */
 public class SegmentTreeRMQ
 {
     public static void main(String[] args)

@@ -1,12 +1,15 @@
 package com.coderevisited.rmq;
 
-import com.coderevisited.utils.MathUtils;
-
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import com.coderevisited.utils.MathUtils;
+
+/**
+ * http://www.topcoder.com/tc?d1=tutorials&d2=lowestCommonAncestor&module=Static
+ */
 public class SparseTableRMQ
 {
     public static void main(String[] args)
