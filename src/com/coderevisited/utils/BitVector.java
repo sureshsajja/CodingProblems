@@ -2,7 +2,7 @@ package com.coderevisited.utils;
 
 /**
  * bit vector with 10 billion bits. methods to to set, toggle, unset a particular bit. Memory used  for storing bits :
- * 1million/32 = (32150 + 1) * 4B = 125004B = 122.07KB
+ * 1million/32 = (32150 + 1) * 4B = 128604B = 128.607KB
  */
 public class BitVector
 {
