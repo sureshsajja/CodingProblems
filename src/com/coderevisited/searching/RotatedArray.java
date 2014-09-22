@@ -1,4 +1,4 @@
-package com.geeksforgeeks;
+package com.coderevisited.searching;
 
 public class RotatedArray
 {

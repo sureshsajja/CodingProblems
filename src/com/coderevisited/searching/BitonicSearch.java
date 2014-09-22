@@ -1,4 +1,4 @@
-package com.geeksforgeeks;
+package com.coderevisited.searching;
 
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
