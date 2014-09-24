@@ -9,7 +9,7 @@ public class SingletonEarly
 
     }
 
-    public SingletonEarly getInstance()
+    public static SingletonEarly getInstance()
     {
         return instance;
     }
