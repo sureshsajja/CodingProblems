@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
-public class MatrixSpiral
+public class MatrixDiagonal
 {
     public static void main(String[] args)
     {
