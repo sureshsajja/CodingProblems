@@ -1,7 +1,7 @@
 package com.coderevisited.utils;
 
 /**
- * bit vector with 10 billion bits. methods to to set, toggle, unset a particular bit. Memory used  for storing bits :
+ * bit vector with 1 million bits. methods to to set, toggle, unset a particular bit. Memory used  for storing bits :
  * 1million/32 = (32150 + 1) * 4B = 128604B = 128.607KB
  */
 public class BitVector
@@ -17,16 +17,16 @@ public class BitVector
     public static void main(String[] args)
     {
         BitVector bitVector = new BitVector(1000000L);
-        System.out.println(" bit 783 is set? ---> " + bitVector.isSet(783));
+        System.out.println(" bit 783 is set? ---> " + bitVector.isSet(7834));
         System.out.println(" now setting bit 783  ");
         bitVector.setBit(783);
-        System.out.println(" bit 783 is set? ---> " + bitVector.isSet(783));
+        System.out.println(" bit 783 is set? ---> " + bitVector.isSet(7834));
         bitVector.unSet(783);
         System.out.println(" un setting bit 783 ");
-        System.out.println(" bit 783 is set? ---> " + bitVector.isSet(783));
+        System.out.println(" bit 783 is set? ---> " + bitVector.isSet(7834));
         bitVector.toggle(783);
         System.out.println(" toggling  bit 783 ");
-        System.out.println(" bit 783 is set? ----> " + bitVector.isSet(783));
+        System.out.println(" bit 783 is set? ----> " + bitVector.isSet(7834));
 
     }
 
