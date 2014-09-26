@@ -3,12 +3,10 @@ package com.hackerearth.webengage;
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
-//todo Not a correct solution
 public class AmazingTest
 {
     public static void main(String[] args)
@@ -21,38 +19,34 @@ public class AmazingTest
         for (int t = 0; t < T; t++) {
             int N = scanner.nextInt();
             int x = scanner.nextInt();
-            Integer[] jobs = new Integer[N];
+            PriorityQueue<Integer> pq = new PriorityQueue<Integer>(N, Collections.reverseOrder());
             for (int n = 0; n < N; n++) {
-                jobs[n] = scanner.nextInt();
+                pq.add(scanner.nextInt());
             }
-
-            Arrays.sort(jobs, Collections.reverseOrder());
-            PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
             pq.add(0);
-            pq.add(0);
-
-            for (int n = 0; n < N; n++) {
-                int i = pq.poll();
-                pq.add(i + jobs[n]);
-            }
-
-            boolean canBeDone = true;
-            while (!pq.isEmpty()) {
-                if (pq.poll() > x) {
-                    canBeDone = false;
+            int time = 0;
+            while (true) {
+                int val = pq.poll();
+                if (val == 0)
+                    break;
+                int val1 = pq.poll();
+                if (val1 == 0) {
+                    time += val;
                     break;
                 }
-            }
 
-            if (canBeDone) {
+                time += val1;
+                val -= val1;
+                pq.add(val);
+
+            }
+            if (time <= x) {
                 pw.println("YES");
             } else {
                 pw.println("NO");
             }
 
         }
-
-
         scanner.close();
         pw.close();
     }
