@@ -1,4 +1,4 @@
-package com.coderevisited.dynamicprogramming;
+package com.coderevisited.subsetsum;
 
 public class SubsetSumRecursive
 {
