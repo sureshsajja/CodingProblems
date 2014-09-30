@@ -1,5 +1,8 @@
 package com.coderevisited.subsetsum;
 
+/**
+ * Count no of subsets with given sum
+ */
 public class SubsetCountWithSumK
 {
     public static void main(String[] args)

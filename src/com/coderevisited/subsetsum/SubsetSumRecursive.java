@@ -1,5 +1,8 @@
 package com.coderevisited.subsetsum;
 
+/**
+ * Recursively checks if there exists any subset with given sum
+ */
 public class SubsetSumRecursive
 {
     public static void main(String[] args)

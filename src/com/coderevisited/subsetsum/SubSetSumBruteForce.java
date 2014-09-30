@@ -4,6 +4,9 @@ import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
+/**
+ * Print all subsets with given sum
+ */
 public class SubSetSumBruteForce
 {
     public static void main(String[] args)

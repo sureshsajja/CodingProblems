@@ -1,5 +1,8 @@
 package com.coderevisited.subsetsum;
 
+/**
+ * Checks if there exists any subset with given sum
+ */
 public class SubsetSumDP
 {
 
