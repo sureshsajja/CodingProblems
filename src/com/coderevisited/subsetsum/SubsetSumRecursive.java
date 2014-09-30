@@ -4,14 +4,14 @@ public class SubsetSumRecursive
 {
     public static void main(String[] args)
     {
-        int[] set = new int[]{7, 10, 11, 12, 4, 5, 6, 10, 11};
-        int sum = 9;
+        int[] set = new int[]{7, 10, 11, 12, 4, 5, 6, 10, 11, -15};
+        int sum = 0;
         System.out.println(exists(set, set.length - 1, sum));
     }
 
     private static boolean exists(int[] set, int n, int sum)
     {
-        if (sum == 0) {
+        if (sum == 0 && n != set.length - 1) {
             return true;
         } else if (n == 0) {
             return false;
