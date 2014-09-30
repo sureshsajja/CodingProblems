@@ -4,8 +4,8 @@ public class SubSetSumBruteForce
 {
     public static void main(String[] args)
     {
-        int[] set = new int[]{3, 10, 11, 12, 4, 5, 6, 10, 11, 3, 3, -3};
-        int sum = 0;
+        int[] set = new int[]{7, 10, 11, 12, 4, 5, 6, 3, 2, 1};
+        int sum = 8;
         printSubsets(0, set, sum, new int[set.length], 0, 0);
     }
 
