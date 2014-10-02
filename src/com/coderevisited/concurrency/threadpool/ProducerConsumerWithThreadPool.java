@@ -32,7 +32,6 @@ public class ProducerConsumerWithThreadPool
             pool.addTask(new Consumer());
             pool.addTask(new Consumer());
         }
-
     }
 
     private class Producer implements Runnable
@@ -48,7 +47,6 @@ public class ProducerConsumerWithThreadPool
             } catch (InterruptedException e2) {
                 Thread.currentThread().interrupt();
             }
-
         }
     }
 
