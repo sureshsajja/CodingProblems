@@ -1,4 +1,4 @@
-package com.coderevisited.utils;
+package com.coderevisited.prime;
 
 import java.util.BitSet;
 

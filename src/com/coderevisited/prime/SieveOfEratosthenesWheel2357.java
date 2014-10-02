@@ -1,4 +1,4 @@
-package com.coderevisited.utils;
+package com.coderevisited.prime;
 
 /**
  * Implementation of Sieve Of Eratosthenes.. Generating prime numbers up to 1 billion using wheel_2357

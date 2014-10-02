@@ -1,4 +1,4 @@
-package com.coderevisited.utils;
+package com.coderevisited.bits;
 
 public class BitHacks
 {

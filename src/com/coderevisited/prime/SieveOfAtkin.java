@@ -1,4 +1,4 @@
-package com.coderevisited.utils;
+package com.coderevisited.prime;
 
 /**
  * Implementation of Sieve of Atkin.. Generating prime numbers up to 1 billion

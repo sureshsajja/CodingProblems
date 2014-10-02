@@ -1,4 +1,4 @@
-package com.coderevisited.utils;
+package com.coderevisited.bits;
 
 /**
  * bit vector with 1 million bits. methods to to set, toggle, unset a particular bit. Memory used  for storing bits :
