@@ -5,7 +5,6 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-//TODO Not correct solution
 public class StartingGameDevelopment
 {
     public static void main(String[] args)
@@ -34,8 +33,6 @@ public class StartingGameDevelopment
             }
             pw.println(minLevel);
         }
-
-
         scanner.close();
         pw.close();
     }
@@ -44,7 +41,7 @@ public class StartingGameDevelopment
     {
         while (low <= high) {
             int mid = low + (high - low) / 2;
-            if (mid == array.length - 1 || array[mid] == key && array[mid + 1] > key) {
+            if ((array[mid] == key) && (mid == array.length - 1 || array[mid + 1] > key)) {
                 return mid;
             } else if (array[mid] > key) {
                 high = mid - 1;
