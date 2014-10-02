@@ -13,7 +13,6 @@ public class ProducerConsumerWithThreadPool
     {
         ProducerConsumerWithThreadPool pc = new ProducerConsumerWithThreadPool();
         pc.init();
-
     }
 
     public ProducerConsumerWithThreadPool()
