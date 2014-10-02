@@ -18,7 +18,6 @@ public class ReplaceWithNextGreatest
         replaceWithNextGreatest(array);
         printArray(array, pw);
 
-
         pw.close();
     }
 
