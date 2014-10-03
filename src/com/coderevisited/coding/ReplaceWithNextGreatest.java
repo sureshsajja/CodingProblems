@@ -29,6 +29,7 @@ public class ReplaceWithNextGreatest
             array[i] = max;
             max = max > current ? max : current;
         }
+        //set N-1th element to -1
         array[array.length - 1] = -1;
     }
 
