@@ -1,123 +1,110 @@
 package com.coderevisited.linkedlists;
 
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 
 public class ReverseALinkedList
 {
-
     private Node head;
 
-    public ReverseALinkedList()
+    public void buildList()
     {
-
-        Node one = new Node(1, null);
-        Node two = new Node(2, null);
-        Node three = new Node(3, null);
-        Node four = new Node(4, null);
-        Node five = new Node(5, null);
-        Node six = new Node(6, null);
-        Node seven = new Node(7, null);
-        Node eight = new Node(8, null);
         Node nine = new Node(9, null);
-
-        head = one;
-        one.setNext(two);
-        two.setNext(three);
-        three.setNext(four);
-        four.setNext(five);
-        five.setNext(six);
-        six.setNext(seven);
-        seven.setNext(eight);
-        eight.setNext(nine);
+        Node eight = new Node(8, nine);
+        Node seven = new Node(7, eight);
+        Node six = new Node(6, seven);
+        Node five = new Node(5, six);
+        Node four = new Node(4, five);
+        Node three = new Node(3, four);
+        Node two = new Node(2, three);
+        head = new Node(1, two);
     }
 
+    public void printList(PrintWriter pw)
+    {
+        Node temp = head;
+        while (temp != null) {
+            pw.print(temp.val);
+            temp = temp.next;
+            if (temp != null)
+                pw.print("->");
+        }
+        pw.println();
+    }
 
     public static void main(String[] args)
     {
-
+        PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
         ReverseALinkedList list = new ReverseALinkedList();
-        list.printList();
+        list.buildList();
+        list.printList(pw);
+
+        pw.println("Reversing by recursive call");
+        list.reverseRecursive();
+        list.printList(pw);
+
+        pw.println("Reversing by iterative call");
         list.reverseList();
-        list.printList();
-        list.reverseKNodes(2);
-        list.printList();
+        list.printList(pw);
 
+        pw.close();
     }
 
-    private void reverseKNodes(int k)
+    public void reverseRecursive()
     {
-        Node current = head;
-        Node prevHead = null;
-        Node prevCurrent = null;
-        while (current != null) {
-            int count = k;
-            Node prev = null;
-            while (current != null && count > 0) {
-                Node next = current.getNext();
-                current.setNext(prev);
-                prev = current;
-                current = next;
-                count--;
-            }
-            if (prevHead != null) {
-                prevHead.setNext(prev);
-                prevHead = prevCurrent;
-                prevCurrent = current;
-            } else {
-                prevHead = head;
-                head = prev;
-                prevCurrent = current;
-            }
+        reverseRecursiveUtil(head);
+    }
 
+    public void reverseRecursiveUtil(Node current)
+    {
+        if (current == null) {
+            return;
         }
+
+        //base case
+        Node next = current.next;
+        if (next == null) {
+            head = current;
+            return;
+        }
+
+        reverseRecursiveUtil(next);
+
+        //Make next node points to current node
+        next.next = current;
+        //Remove existing link
+        current.next = null;
     }
 
-
-    private void reverseList()
+    public void reverseList()
     {
+        //initially Current is head
         Node current = head;
+        //initially previous is null
         Node prev = null;
         while (current != null) {
-            Node next = current.getNext();
-            current.setNext(prev);
+            //Save the next node
+            Node next = current.next;
+            //Make current node points to the previous
+            current.next = prev;
+            //update previous
             prev = current;
+            //update current
             current = next;
         }
         head = prev;
     }
 
-    private void printList()
-    {
-        Node temp = head;
-        while (temp != null) {
-            System.out.print(temp.getVal() + " ");
-            temp = temp.getNext();
-        }
-        System.out.println();
-    }
 
     private static class Node
     {
-        private final int val;
+        private int val;
         private Node next;
 
         public Node(int val, Node next)
         {
             this.val = val;
-            this.next = next;
-        }
-
-        public int getVal()
-        {
-            return val;
-        }
-
-        public Node getNext()
-        {
-            return next;
-        }
-
-        public void setNext(Node next)
-        {
             this.next = next;
         }
     }
