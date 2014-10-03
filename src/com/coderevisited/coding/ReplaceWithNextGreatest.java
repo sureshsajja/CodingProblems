@@ -9,15 +9,12 @@ public class ReplaceWithNextGreatest
     public static void main(String[] args)
     {
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-
         int[] array = new int[]{16, 6, 9, 10, 11, 17, 4, 3, 9, 8, 5, 2, 14};
         replaceWithNextGreatest(array);
         printArray(array, pw);
-
         array = new int[]{-2, -7, -8};
         replaceWithNextGreatest(array);
         printArray(array, pw);
-
         pw.close();
     }
 
@@ -38,6 +35,5 @@ public class ReplaceWithNextGreatest
             pw.print(i + " ");
         }
         pw.println();
-
     }
 }
