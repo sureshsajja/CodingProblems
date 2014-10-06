@@ -8,13 +8,13 @@ public class KDistantFromANode
         printKDistantNodes(root, 4, 3);
     }
 
-    private static int printKDistantNodes(BinaryTreeNode node, int target, int k)
+    public static int printKDistantNodes(BinaryTreeNode node, int target, int k)
     {
         if (node == null)
             return -1;
 
         if (node.getValue() == target) {
-            printKDistantFromRoot(node, k);
+            KDistantFromRoot.printKDistantFromRoot(node, k);
             return 0;
         }
         //distance of target node from left child
@@ -24,7 +24,7 @@ public class KDistantFromANode
             if (left + 1 == k)
                 System.out.print(node.getValue() + " ");
             else
-                printKDistantFromRoot(node.getRight(), k - left - 2);
+                KDistantFromRoot.printKDistantFromRoot(node.getRight(), k - left - 2);
 
             //It is 1+left distant from node
             return 1 + left;
@@ -37,7 +37,7 @@ public class KDistantFromANode
             if (right + 1 == k)
                 System.out.print(node.getValue() + " ");
             else
-                printKDistantFromRoot(node.getLeft(), k - right - 2);
+                KDistantFromRoot.printKDistantFromRoot(node.getLeft(), k - right - 2);
 
             //It is 1+right distant from node
             return 1 + right;
@@ -45,20 +45,5 @@ public class KDistantFromANode
         }
 
         return -1;
-    }
-
-    private static void printKDistantFromRoot(BinaryTreeNode node, int k)
-    {
-        if (node == null)
-            return;
-
-        if (k == 0) {
-            System.out.print(node.getValue() + " ");
-            return;
-        }
-
-        printKDistantFromRoot(node.getLeft(), k - 1);
-        printKDistantFromRoot(node.getRight(), k - 1);
-
     }
 }

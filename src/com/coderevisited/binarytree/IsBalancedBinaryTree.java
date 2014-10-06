@@ -11,10 +11,9 @@ public class IsBalancedBinaryTree
         } else {
             System.out.println("Tree is not balanced");
         }
-
     }
 
-    private static boolean isHeightBalanced(BinaryTreeNode root, int[] height)
+    public static boolean isHeightBalanced(BinaryTreeNode root, int[] height)
     {
 
         if (root == null)

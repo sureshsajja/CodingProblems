@@ -5,7 +5,6 @@ import java.util.List;
 
 public class BinaryTreeLCA
 {
-
     public static void main(String[] args)
     {
 
@@ -22,23 +21,17 @@ public class BinaryTreeLCA
 
     }
 
-    private static int findLCASingleTraversal(int n1, int n2, BinaryTreeNode root)
+    public static int findLCASingleTraversal(int n1, int n2, BinaryTreeNode root)
     {
         boolean[] found = new boolean[2];
         BinaryTreeNode lca = findLCASingleTraversalUtil(n1, n2, root, found);
         //verify if both nodes are present
-        if (found[0] && found[1] || found[1] && find(n1, lca) || found[0] && find(n2, lca)) {
+        if (found[0] && found[1] || found[1] && BinaryTreeSearch.ifExists(n1, lca) || found[0] && BinaryTreeSearch.ifExists(n2, lca)) {
             return lca.getValue();
         } else {
             return -1;
         }
     }
-
-    private static boolean find(int n, BinaryTreeNode node)
-    {
-        return node != null && (node.getValue() == n || find(n, node.getLeft()) || find(n, node.getRight()));
-    }
-
 
     public static BinaryTreeNode findLCASingleTraversalUtil(int n1, int n2, BinaryTreeNode node, boolean[] found)
     {
@@ -83,8 +76,8 @@ public class BinaryTreeLCA
         List<BinaryTreeNode> path1 = new LinkedList<>();
         List<BinaryTreeNode> path2 = new LinkedList<>();
         int lca = -1;
-        if (searchForPath(n1, path1, root)) {
-            if (searchForPath(n2, path2, root)) {
+        if (BinaryTreeSearch.searchForPath(n1, path1, root)) {
+            if (BinaryTreeSearch.searchForPath(n2, path2, root)) {
                 //If we find path of two nodes, return the last common node
                 for (int i = 0; i < path1.size() && i < path2.size(); i++) {
                     if (path1.get(i).getValue() != path2.get(i).getValue()) {
@@ -97,27 +90,4 @@ public class BinaryTreeLCA
         return lca;
     }
 
-    public static boolean searchForPath(int n, List<BinaryTreeNode> path, BinaryTreeNode node)
-    {
-        if (node == null) {
-            return false;
-        }
-
-        //Include in the path
-        path.add(node);
-
-        if (node.getValue() == n) {
-            //If this is the current node, return true
-            return true;
-        }
-
-        //Recursively search left sub tree and right sub tree
-        if (searchForPath(n, path, node.getLeft()) || searchForPath(n, path, node.getRight())) {
-            return true;
-        }
-
-        //Present node is not included in the path. Remove it
-        path.remove(node);
-        return false;
-    }
 }

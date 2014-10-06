@@ -8,7 +8,7 @@ public class KDistantFromRoot
         printKDistantFromRoot(root, 3);
     }
 
-    private static void printKDistantFromRoot(BinaryTreeNode node, int k)
+    public static void printKDistantFromRoot(BinaryTreeNode node, int k)
     {
         if (node == null)
             return;

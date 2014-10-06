@@ -19,11 +19,9 @@ public class IsBST
         } else {
             System.out.println("Tree is not BST");
         }
-
-
     }
 
-    private static boolean checkIfBST(BinaryTreeNode root, int min, int max)
+    public static boolean checkIfBST(BinaryTreeNode root, int min, int max)
     {
         return root == null || min <= root.getValue() && root.getValue() <= max && checkIfBST(root.getLeft(), min, root.getValue()) && checkIfBST(root.getRight(), root.getValue(), max);
     }

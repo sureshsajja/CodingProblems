@@ -27,4 +27,14 @@ public class BinaryTreeNode
     {
         return right;
     }
+
+    public void setLeft(BinaryTreeNode left)
+    {
+        this.left = left;
+    }
+
+    public void setRight(BinaryTreeNode right)
+    {
+        this.right = right;
+    }
 }
