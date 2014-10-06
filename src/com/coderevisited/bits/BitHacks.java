@@ -21,4 +21,13 @@ public class BitHacks
         i |= (i >> 16);
         return i - (i >>> 1);
     }
+
+    /**
+     * Lexicographically next permutation
+     */
+    private static int nextPerm(int v)
+    {
+        int t = (v | (v - 1)) + 1;
+        return t | ((((t & -t) / (v & -v)) >> 1) - 1);
+    }
 }
