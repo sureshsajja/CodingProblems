@@ -3,7 +3,6 @@ package com.hackerrank.week11;
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.math.BigInteger;
 import java.util.Scanner;
 
 /**
@@ -14,9 +13,7 @@ import java.util.Scanner;
 public class SherlockAndSquare
 {
 
-
-    private static BigInteger two = BigInteger.valueOf(2L);
-    private static BigInteger mod = BigInteger.valueOf(1000000007);
+    private static final int MOD = 1000000007;
 
 
     public static void main(String[] args)
@@ -27,7 +24,7 @@ public class SherlockAndSquare
         int T = scanner.nextInt();
         for (int t = 0; t < T; t++) {
             int i = scanner.nextInt();
-            pw.println(find(i));
+            pw.println(find(i + 1));
         }
 
         pw.close();
@@ -36,7 +33,22 @@ public class SherlockAndSquare
 
     private static int find(int i)
     {
-        return two.pow(i + 1).add(two).mod(mod).intValue();
-    }
+        long result = 1, a = 2;
 
+        while (i != 0) {
+            if ((i & 1) != 0) {
+                //if it is odd.. multiply once
+                result = (result * a) % MOD;
+            }
+
+            i = i >> 1;
+            //half the i, and square a
+            if (i != 0) {
+                a = (a * a) % MOD;
+            }
+        }
+
+        int r = (int) result + 2;
+        return r % MOD;
+    }
 }
