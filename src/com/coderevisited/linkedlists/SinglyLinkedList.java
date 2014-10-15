@@ -35,7 +35,21 @@ public class SinglyLinkedList
         SinglyLinkedListNode g = new SinglyLinkedListNode(4, f);
         SinglyLinkedListNode h = new SinglyLinkedListNode(0, g);
         return new SinglyLinkedListNode(11, h);
+    }
 
+
+    public static SinglyLinkedListNode buildLoopedLinkedList()
+    {
+        SinglyLinkedListNode a = new SinglyLinkedListNode(12, null);
+        SinglyLinkedListNode b = new SinglyLinkedListNode(8, a);
+        SinglyLinkedListNode c = new SinglyLinkedListNode(6, b);
+        SinglyLinkedListNode d = new SinglyLinkedListNode(14, c);
+        SinglyLinkedListNode e = new SinglyLinkedListNode(7, d);
+        SinglyLinkedListNode f = new SinglyLinkedListNode(9, e);
+        SinglyLinkedListNode g = new SinglyLinkedListNode(4, f);
+        SinglyLinkedListNode h = new SinglyLinkedListNode(0, g);
+        a.setNext(e);
+        return new SinglyLinkedListNode(11, h);
     }
 
     public static int getLength(SinglyLinkedListNode head)
@@ -69,11 +83,5 @@ public class SinglyLinkedList
             temp = temp.getNext();
         }
         return null;
-    }
-
-    public static void addLast(SinglyLinkedListNode head, SinglyLinkedListNode toAppend)
-    {
-
-
     }
 }

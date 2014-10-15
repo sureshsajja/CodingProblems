@@ -10,39 +10,39 @@ public class IntersectionOfTwoLinkedLists
     {
 
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-        SinglyLinkedListNode root1 = SinglyLinkedList.buildRandomList();
-        SinglyLinkedListNode root2 = SinglyLinkedList.build123();
-        connectLists(root1, root2);
-        SinglyLinkedList.printList(root1, pw);
-        SinglyLinkedList.printList(root2, pw);
-        SinglyLinkedListNode intersection = findIntersectionOfTwoLists(root1, root2);
+        SinglyLinkedListNode head1 = SinglyLinkedList.buildRandomList();
+        SinglyLinkedListNode head2 = SinglyLinkedList.build123();
+        connectLists(head1, head2);
+        SinglyLinkedList.printList(head1, pw);
+        SinglyLinkedList.printList(head2, pw);
+        SinglyLinkedListNode intersection = findIntersectionOfTwoLists(head1, head2);
         pw.println("Intersection of two lists : " + intersection.getValue());
         pw.close();
 
     }
 
-    private static SinglyLinkedListNode findIntersectionOfTwoLists(SinglyLinkedListNode root1, SinglyLinkedListNode root2)
+    private static SinglyLinkedListNode findIntersectionOfTwoLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2)
     {
-        int length1 = SinglyLinkedList.getLength(root1);
-        int length2 = SinglyLinkedList.getLength(root2);
+        int length1 = SinglyLinkedList.getLength(head1);
+        int length2 = SinglyLinkedList.getLength(head2);
 
         if (length1 > length2) {
             int diff = length1 - length2;
             for (int i = 0; i < diff; i++) {
-                root1 = root1.getNext();
+                head1 = head1.getNext();
             }
         } else {
             int diff = length2 - length1;
             for (int i = 0; i < diff; i++) {
-                root2 = root2.getNext();
+                head2 = head2.getNext();
             }
         }
 
-        while (root1 != null && root2 != null) {
-            if (root1.getValue() == root2.getValue())
-                return root1;
-            root1 = root1.getNext();
-            root2 = root2.getNext();
+        while (head1 != null && head2 != null) {
+            if (head1.getValue() == head2.getValue())
+                return head1;
+            head1 = head1.getNext();
+            head2 = head2.getNext();
         }
         return null;
     }
