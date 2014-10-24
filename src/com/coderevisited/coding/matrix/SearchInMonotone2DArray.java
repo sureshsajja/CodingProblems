@@ -1,6 +1,6 @@
 package com.coderevisited.coding.matrix;
 
-public class SearchInRowWiseColumnWiseSortedMatrix
+public class SearchInMonotone2DArray
 {
     public static void main(String[] args)
     {

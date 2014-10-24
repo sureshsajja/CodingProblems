@@ -2,7 +2,7 @@ package com.coderevisited.coding.matrix;
 
 import java.util.PriorityQueue;
 
-public class SortedArrayFromMatrix
+public class SortedArrayFromMonotone2DArray
 {
     public static void main(String[] args)
     {
