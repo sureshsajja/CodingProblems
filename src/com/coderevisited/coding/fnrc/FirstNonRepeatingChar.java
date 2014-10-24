@@ -1,4 +1,4 @@
-package com.coderevisited.coding;
+package com.coderevisited.coding.fnrc;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
