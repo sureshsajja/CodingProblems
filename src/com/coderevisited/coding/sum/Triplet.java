@@ -15,22 +15,17 @@ public class Triplet
     {
         Arrays.sort(array);
 
-        for (int i = 0; i < array.length - 2; i++)
-        {
+        for (int i = 0; i < array.length - 2; i++) {
             int b = i + 1;
             int c = array.length - 1;
 
-            while (b < c)
-            {
-                if (array[i] + array[b] + array[c] == sum)
-                {
-                    System.out.println("values that make the given sum :  " + array[i] + " , " + array[b] + " , " + array[c]);
+            while (b < c) {
+                if (array[i] + array[b] + array[c] == sum) {
+                    System.out.println("values that make the given sum :  " + array[i] + ", " + array[b] + ", " + array[c]);
                     return;
-                } else if (array[i] + array[b] + array[c] > sum)
-                {
+                } else if (array[i] + array[b] + array[c] > sum) {
                     c--;
-                } else if (array[i] + array[b] + array[c] < sum)
-                {
+                } else if (array[i] + array[b] + array[c] < sum) {
                     b++;
                 }
             }
@@ -41,15 +36,11 @@ public class Triplet
     {
         Arrays.sort(array);
 
-        for (int i = 0; i < array.length - 2; i++)
-        {
-            for (int b = i + 1; b < array.length - 1; b++)
-            {
-                int c = sum - array[b];
-                int returned = Arrays.binarySearch(array, b + 1, array.length, c);
-                if (returned > 0)
-                {
-                    System.out.println("values that make the given sum :  " + array[i] + " , " + array[b] + " , " + array[c]);
+        for (int i = 0; i < array.length - 2; i++) {
+            for (int j = i + 1; j < array.length - 1; j++) {
+                int k = Arrays.binarySearch(array, j + 1, array.length, sum - array[j] - array[i]);
+                if (k > 0) {
+                    System.out.println("values that make the given sum :  " + array[i] + ", " + array[j] + ", " + array[k]);
                 }
             }
         }
