@@ -7,7 +7,7 @@ public class GenerateNBitGrayCodes
 {
     public static void main(String[] args)
     {
-        List<String> list = generateGrayCode(5);
+        List<String> list = generateGrayCode(8);
         for (String code : list) {
             System.out.println(code);
         }
