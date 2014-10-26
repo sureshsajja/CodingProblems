@@ -4,9 +4,9 @@ import java.util.*;
 
 /**
  * Algorithm:
- * 1. By traversing the matrix, store indexes of each char of the search string in a map.
- * 2. start from index of first char, loop through all chars of the search string.
- * 3. At any point if we know there can't be solution found back track to the previous solution.
+ * 1. By traversing the matrix, store indexes of each char of the search string in a map. O(MN)
+ * 2. Perform exhaustive backtrack search starting from index of first char, loop through all chars of the search string. O(MN*K*8)
+ * 3. At any point if we know there can't be solution found, backtrack to the previous char and choose next path.
  */
 public class StringIn2DArray
 {
@@ -28,36 +28,55 @@ public class StringIn2DArray
 
                 {'Q', 'A', 'T', 'I', 'T'}};
 
-        Map<Character, List<Index>> map = new HashMap<>();
-        String toSearch = "MICROSOFT";
-        for (char c : toSearch.toCharArray()) {
-            map.put(c, new ArrayList<Index>());
-        }
 
-        findIndices(matrix, map, N, M);
+        String toSearch = "MICROSOFM";
         Index[] solution = new Index[toSearch.length()];
-        boolean solutionExists = findSolution(map, toSearch, solution);
+        boolean solutionExists = findSolution(matrix, N, M, toSearch, solution);
         if (solutionExists) {
-            System.out.println("Solution found and it's path : ");
+            System.out.println("Solution is found and it's path : ");
             for (int i = 0; i < solution.length - 1; i++) {
                 System.out.print(solution[i] + " -> ");
             }
             System.out.println(solution[solution.length - 1]);
+        }else{
+            System.out.println("Solution is not found");
         }
     }
 
-    private static boolean findSolution(Map<Character, List<Index>> map, String toSearch, Index[] solution)
+    private static boolean findSolution(char[][] matrix, int N, int M, String toSearch, Index[] solution)
     {
 
+        Map<Character, List<Index>> map = new HashMap<>();
+
+        //Init map with every character of the search string
+        for (char c : toSearch.toCharArray()) {
+            map.put(c, new ArrayList<Index>());
+        }
+
+        //Update indexes of search chars from matrix
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                if (map.containsKey(matrix[i][j])) {
+                    List<Index> list = map.get(matrix[i][j]);
+                    list.add(new Index(i, j));
+                }
+            }
+        }
+
         List<Index> list = map.get(toSearch.charAt(0));
-        Set<Index> visited = new HashSet<>();
         if (list.isEmpty())
             return false;
 
+        //Keep track of visited indexes
+        Set<Index> visited = new HashSet<>();
+
         for (Index index : list) {
             solution[0] = index;
+            visited.add(index);
             if (findIfWordExists(map, toSearch, 1, index, solution, visited)) {
                 return true;
+            } else {
+                visited.remove(index);
             }
         }
         return false;
@@ -67,15 +86,20 @@ public class StringIn2DArray
     private static boolean findIfWordExists(Map<Character, List<Index>> map, String toSearch, int current, Index index, Index[] solution, Set<Index> visited)
     {
 
+        //Verify if any indexes of current char can be included in the path
         List<Index> list = map.get(toSearch.charAt(current));
         if (list.isEmpty())
             return false;
         for (Index _index : list) {
             if (checkIfAdjacent(index, _index, visited)) {
                 solution[current] = _index;
+                visited.add(_index);
                 if (current == toSearch.length() - 1 ||
                         findIfWordExists(map, toSearch, current + 1, _index, solution, visited))
                     return true;
+                else {
+                    visited.remove(_index);
+                }
             }
         }
 
@@ -92,19 +116,6 @@ public class StringIn2DArray
         }
         return false;
     }
-
-    private static void findIndices(char[][] matrix, Map<Character, List<Index>> map, int N, int M)
-    {
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < M; j++) {
-                if (map.containsKey(matrix[i][j])) {
-                    List<Index> list = map.get(matrix[i][j]);
-                    list.add(new Index(i, j));
-                }
-            }
-        }
-    }
-
 
     private static class Index
     {
