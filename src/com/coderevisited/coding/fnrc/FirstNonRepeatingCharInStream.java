@@ -4,6 +4,10 @@ import java.io.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * Maintain a LinkedHashSet. If current char is already existed in the set, remove it. Else add that char in the set. At
+ * any point return the first element in the set
+ */
 public class FirstNonRepeatingCharInStream
 {
 

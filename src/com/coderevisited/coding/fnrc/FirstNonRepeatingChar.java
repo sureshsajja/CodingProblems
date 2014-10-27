@@ -3,6 +3,10 @@ package com.coderevisited.coding.fnrc;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Maintain LinkedHashMap, key as character and value as number occurrences. For each each character read, update the
+ * value. At the end by going through the map. return the first character that has value 1
+ */
 public class FirstNonRepeatingChar
 {
     public static void main(String[] args)
