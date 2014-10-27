@@ -1,4 +1,4 @@
-package com.coderevisited.coding.fnrc;
+package com.coderevisited.strings.fnrc;
 
 import java.io.*;
 import java.util.LinkedHashSet;
