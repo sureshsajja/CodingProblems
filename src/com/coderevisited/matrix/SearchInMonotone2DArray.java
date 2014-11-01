@@ -1,5 +1,14 @@
-package com.coderevisited.coding.matrix;
+package com.coderevisited.matrix;
 
+/**
+ * Algorithm:
+ * =========
+ * Start from top right corner element.
+ * If element is equal to the key, return
+ * if element > key, reduce column
+ * if element < key, increase row
+ * repeat until, search is with in matrix boundaries.
+ */
 public class SearchInMonotone2DArray
 {
     public static void main(String[] args)
