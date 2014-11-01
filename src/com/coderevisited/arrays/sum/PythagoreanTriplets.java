@@ -1,7 +1,17 @@
-package com.coderevisited.coding.sum;
+package com.coderevisited.arrays.sum;
 
 import java.util.Arrays;
 
+/**
+ * Pythagorean triplet
+ * ===================
+ * c^2 = a^2+b^2
+ * 1. First square all elements
+ * 2. Sort the squares of the array
+ * 3. for each element 'i' from 0 to array.length - 3
+ * 4. for each element 'j' from i+1 to array.length - 2
+ * 5. Find if there exists any element whose value is array[i]+array[j]
+ */
 public class PythagoreanTriplets
 {
     public static void main(String[] args)
