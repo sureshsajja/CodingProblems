@@ -1,8 +1,11 @@
 package com.coderevisited.bits;
 
+/**
+ * binary to gray : n XOR n/2
+ * gray to binary : n ^ n/2 ^ n/4 ^ n/8 ... 1
+ */
 public class GrayCodeConversion
 {
-
     public static void main(String[] args)
     {
         int n = binaryToGrayCode(10);
