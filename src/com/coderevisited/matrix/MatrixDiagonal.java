@@ -1,4 +1,4 @@
-package com.coderevisited.coding.matrix;
+package com.coderevisited.matrix;
 
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
