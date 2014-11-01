@@ -1,9 +1,15 @@
-package com.coderevisited.coding.arrays;
+package com.coderevisited.arrays;
 
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
+/**
+ * Replace with Next greatest element
+ * 1. Start from array.length -1 to 0
+ * 2. For each iteration, Keep track of the maximum. set current element to max.
+ * 3. Finally set last element to -1
+ */
 public class ReplaceWithNextGreatest
 {
     public static void main(String[] args)
