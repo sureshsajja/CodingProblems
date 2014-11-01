@@ -3,21 +3,11 @@ package com.coderevisited.matrix;
 /**
  * In the first iteration find sum of sub matrix of size K x 1
  * In the second iteration find sum of sub square matrix K x K
- *
  */
 public class SumOfAllSubSquares
 {
     public static void main(String[] args)
     {
-//        int N = 5;
-//        int[][] matrix = new int[][]{{1, 1, 1, 1, 1},
-//                {2, 2, 2, 2, 2},
-//                {3, 3, 3, 3, 3},
-//                {4, 4, 4, 4, 4},
-//                {5, 5, 5, 5, 5},
-//        };
-//        int K = 3;
-
         int N = 3, K = 2;
         int[][] matrix = new int[][]{{1, 2, 3},
                 {4, 5, 6},
@@ -37,6 +27,18 @@ public class SumOfAllSubSquares
     {
 
         int[][] stripSum = new int[k][n];
+
+        /**
+         * for array {1,2, 3}
+         *           {4, 5, 6}
+         *           {7, 8, 9}
+         *
+         * In first iteration find {5, 7, 9}
+         *                      {11, 13, 15}
+         *
+         * In second iteration find {12, 16}
+         *                          (24, 28}
+         */
 
         for (int j = 0; j < n; j++) {
             int i = 0;
