@@ -1,5 +1,11 @@
-package com.coderevisited.coding.matrix;
+package com.coderevisited.matrix;
 
+/**
+ * start from (0,0)
+ * if current value is 1. mark it visited
+ * Do dfs : recursively visit all '1' which are reachable from this index.
+ * For each non visited node, increase island count
+ */
 public class NumOfIslands
 {
 
