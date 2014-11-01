@@ -1,7 +1,16 @@
-package com.coderevisited.coding.matrix;
+package com.coderevisited.matrix;
 
 import java.util.PriorityQueue;
 
+/**
+ * This problem is reduced to merging N sorted arrays
+ * Algorithm:
+ * =========
+ * 1. for each row add first element to priority Queue
+ * 2. remove minimum element and add it in result array.
+ * 3. Add next element from same row to the priority queue. If there are no elements discard.
+ * 4. repeat until priority queue is empty.
+ */
 public class SortedArrayFromMonotone2DArray
 {
     public static void main(String[] args)
