@@ -1,4 +1,4 @@
-package com.coderevisited.coding.matrix;
+package com.coderevisited.matrix;
 
 import java.util.*;
 
@@ -29,7 +29,7 @@ public class StringIn2DArray
                 {'Q', 'A', 'T', 'I', 'T'}};
 
 
-        String toSearch = "MICROSOFM";
+        String toSearch = "MICROSOFT";
         Index[] solution = new Index[toSearch.length()];
         boolean solutionExists = findSolution(matrix, N, M, toSearch, solution);
         if (solutionExists) {
@@ -38,7 +38,7 @@ public class StringIn2DArray
                 System.out.print(solution[i] + " -> ");
             }
             System.out.println(solution[solution.length - 1]);
-        }else{
+        } else {
             System.out.println("Solution is not found");
         }
     }
