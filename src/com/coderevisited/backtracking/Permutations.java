@@ -1,5 +1,9 @@
 package com.coderevisited.backtracking;
 
+/**
+ * 1. recursively print permutations by swapping elements
+ * 2. after each step back track to previous step
+ */
 public class Permutations
 {
     public static void main(String[] args)
@@ -16,8 +20,10 @@ public class Permutations
         }
 
         for (int i = index; i <= length; i++) {
+            //swap elements
             swap(chars, i, index);
             printPermutations(chars, index + 1, length);
+            //backtrack
             swap(chars, i, index);
         }
 
