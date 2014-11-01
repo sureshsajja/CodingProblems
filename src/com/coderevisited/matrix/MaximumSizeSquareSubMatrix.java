@@ -1,5 +1,12 @@
-package com.coderevisited.coding.matrix;
+package com.coderevisited.matrix;
 
+/**
+ * Algorithm:
+ * 1. Progressively construct result matrix S[][]
+ * 1. Initially copy first row and first column to result matrix
+ * 2. Start from (1,1), at each step if matrix[i][j] = 1, S[i][j] = min{S[i-1][j], S[i][j-1], S[i-1][j-1]} +1
+ * 3. Traverse S[i][j] to check the maximum value and it's index
+ */
 public class MaximumSizeSquareSubMatrix
 {
 
