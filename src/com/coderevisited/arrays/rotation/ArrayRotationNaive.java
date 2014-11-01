@@ -1,4 +1,4 @@
-package com.coderevisited.coding.arrays;
+package com.coderevisited.arrays.rotation;
 
 /**
  * array rotation using auxiliary space o(d)
