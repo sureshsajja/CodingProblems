@@ -1,8 +1,15 @@
-package com.coderevisited.coding.arrays;
+package com.coderevisited.arrays;
 
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Find possible pairs where we can buy at first index and sell at next index
+ * 1. Start from index 0;
+ * 2. Find index 'i' such that stock[i+1] > stock[i], set buy at i.
+ * 3. Start from i+1, find index such that stock[i-1] > stock[i], set sell at i-1
+ * 4. repeat until i = stock.length - 1;
+ */
 public class StockBuySell
 {
     public static void main(String[] args)
@@ -29,7 +36,7 @@ public class StockBuySell
             while (i < stock.length - 1 && stock[i] >= stock[i - 1])
                 i++;
 
-            p.sell = i-1;
+            p.sell = i - 1;
 
             result.add(p);
         }
