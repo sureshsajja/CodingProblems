@@ -1,5 +1,9 @@
 package com.coderevisited.strings;
 
+/**
+ * 1.start from 0 to N-M
+ * 2. At each iteration, check if pattern matches.
+ */
 public class PatternSearching
 {
     public static void main(String[] args)
