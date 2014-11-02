@@ -17,7 +17,7 @@ public class DuplicateCount
         }
     }
 
-    private static int leastIndexBinarySearch(int[] array, int low, int high, int key)
+    public static int leastIndexBinarySearch(int[] array, int low, int high, int key)
     {
         while (low <= high) {
             int mid = low + (high - low) / 2;
@@ -32,7 +32,7 @@ public class DuplicateCount
         return -1;
     }
 
-    private static int maxIndexBinarySearch(int[] array, int low, int high, int key)
+    public static int maxIndexBinarySearch(int[] array, int low, int high, int key)
     {
         while (low <= high) {
             int mid = low + (high - low) / 2;
