@@ -1,4 +1,4 @@
-package com.coderevisited.arrays;
+package com.coderevisited.sorting;
 
 import com.coderevisited.searching.DuplicateCount;
 
