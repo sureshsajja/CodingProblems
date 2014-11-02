@@ -1,5 +1,8 @@
 package com.coderevisited.strings;
 
+/**
+ * Add s1 to itself. find if s2 is it's part (s1+s1)
+ */
 public class RotationsOfEachOther
 {
     public static void main(String[] args)
