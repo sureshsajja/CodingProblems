@@ -13,11 +13,11 @@ public class BSTFromPreOrderTraversal
     public static void main(String[] args)
     {
         int[] preOrder = new int[]{10, 5, 1, 7, 40, 50};
-        BinaryTreeNode root = ConstructBST(preOrder, new int[]{0}, Integer.MIN_VALUE, Integer.MAX_VALUE, preOrder[0]);
+        BinaryTreeNode root = constructBST(preOrder, new int[]{0}, Integer.MIN_VALUE, Integer.MAX_VALUE, preOrder[0]);
         BinaryTreeTraversal.printInOrder(root);
     }
 
-    public static BinaryTreeNode ConstructBST(int[] preOrder, int[] index, int min, int max, int key)
+    public static BinaryTreeNode constructBST(int[] preOrder, int[] index, int min, int max, int key)
     {
         if (index[0] >= preOrder.length) {
             return null;
@@ -27,8 +27,8 @@ public class BSTFromPreOrderTraversal
             root = new BinaryTreeNode(preOrder[index[0]], null, null);
             index[0] = index[0] + 1;
             if (index[0] < preOrder.length) {
-                root.setLeft(ConstructBST(preOrder, index, min, key, preOrder[index[0]]));
-                root.setRight(ConstructBST(preOrder, index, key, max, preOrder[index[0]]));
+                root.setLeft(constructBST(preOrder, index, min, key, preOrder[index[0]]));
+                root.setRight(constructBST(preOrder, index, key, max, preOrder[index[0]]));
             }
         }
         return root;
