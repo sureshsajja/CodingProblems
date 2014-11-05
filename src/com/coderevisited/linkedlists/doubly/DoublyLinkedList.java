@@ -1,5 +1,7 @@
 package com.coderevisited.linkedlists.doubly;
 
+import java.io.PrintWriter;
+
 public class DoublyLinkedList
 {
 
@@ -35,5 +37,35 @@ public class DoublyLinkedList
             head = head.getNext();
         }
         return count;
+    }
+
+    public static DoublyLinkedListNode buildDLLWithArbitraryPointers()
+    {
+
+        DoublyLinkedListNode five = new DoublyLinkedListNode(5, null, null);
+        DoublyLinkedListNode four = new DoublyLinkedListNode(4, null, five);
+        DoublyLinkedListNode three = new DoublyLinkedListNode(3, null, four);
+        DoublyLinkedListNode two = new DoublyLinkedListNode(2, null, three);
+        DoublyLinkedListNode one = new DoublyLinkedListNode(1, null, two);
+
+        one.setPrev(three);
+        two.setPrev(one);
+        three.setPrev(five);
+        four.setPrev(three);
+        five.setPrev(two);
+
+        return one;
+    }
+
+    public static void printList(DoublyLinkedListNode head, PrintWriter pw)
+    {
+        while (head != null) {
+            pw.print(head.getValue());
+            head = head.getNext();
+            if (head != null) {
+                pw.print("->");
+            }
+        }
+        pw.println();
     }
 }
