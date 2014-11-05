@@ -13,4 +13,10 @@ public class MathUtils
             return a;
         return gcd(b, a % b);
     }
+
+
+    private static int lcm(int a, int b)
+    {
+        return a * (b / gcd(a, b));
+    }
 }
