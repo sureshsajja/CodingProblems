@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,8 +27,8 @@ public class UneatenLeaves
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
         int res;
         int _N;
-        _N = 100;
-        int[] _A = new int[]{2, 4, 5};
+        _N = 1000000000;
+        int[] _A = new int[]{9, 2, 4, 5, 6, 12, 1045, 5345, 4546, 343, 35345, 45345};
         res = countUneatenLeavesBruteForce(_N, _A);
         pw.println(res);
         res = countUneatenLeaves(_N, _A);
@@ -37,29 +38,52 @@ public class UneatenLeaves
 
     private static int countUneatenLeaves(int n, int[] a)
     {
-        return 0;
+
+        int factors = 0;
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        findFactorialsOfAllCombinations(0, a, 0, new int[a.length], map, n);
+        for (int key : map.keySet()) {
+            if ((key & 1) != 1) {
+                List<Integer> list = map.get(key);
+                for (int i : list) {
+                    factors -= i;
+                }
+            } else {
+                List<Integer> list = map.get(key);
+                for (int i : list) {
+                    factors += i;
+                }
+            }
+        }
+
+        return n - factors;
     }
 
 
-    private static void findAllCombinations(int start, int[] array, int K, int[] result, Map<Integer, List<Integer[]>> map)
+    private static void findFactorialsOfAllCombinations(int start, int[] array, int K, int[] result, Map<Integer, List<Integer>> map, int N)
     {
-        if (K > 1) {
+        if (K > 0) {
             if (!map.containsKey(K)) {
-                map.put(K, new ArrayList<Integer[]>());
+                map.put(K, new ArrayList<Integer>());
             }
-            List<Integer[]> list = map.get(K);
-            Integer[] temp = new Integer[K];
-
-            list.add(temp);
-            for (int i = 0; i < K; i++) {
-                //System.out.print(result[i] + " ");
-                temp[i] = result[i];
-            }
+            List<Integer> list = map.get(K);
+            int[] temp = new int[K];
+            System.arraycopy(result, 0, temp, 0, K);
+            int factors = (int) Math.floor(N / lcm(temp));
+            list.add(factors);
         }
         for (int i = start; i < array.length; i++) {
             result[K] = array[i];
-            findAllCombinations(i + 1, array, K + 1, result, map);
+            findFactorialsOfAllCombinations(i + 1, array, K + 1, result, map, N);
         }
+    }
+
+
+    private static int lcm(int[] input)
+    {
+        int result = input[0];
+        for (int i = 1; i < input.length; i++) result = lcm(result, input[i]);
+        return result;
     }
 
     private static int countUneatenLeavesBruteForce(int N, int[] A)
