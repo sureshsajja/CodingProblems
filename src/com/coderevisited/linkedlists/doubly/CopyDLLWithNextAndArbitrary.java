@@ -13,7 +13,7 @@ public class CopyDLLWithNextAndArbitrary
     {
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
         DoublyLinkedListNode head = DoublyLinkedList.buildDLLWithArbitraryPointers();
-        DoublyLinkedListNode newHead = copyList(head);
+        DoublyLinkedListNode newHead = copyListWithoutExtraSpace(head);
         DoublyLinkedList.printList(newHead, pw);
         pw.close();
 
@@ -51,9 +51,45 @@ public class CopyDLLWithNextAndArbitrary
             origHead = origHead.getNext();
             temp = temp.getNext();
         }
+        return newHead;
+    }
+
+
+    private static DoublyLinkedListNode copyListWithoutExtraSpace(DoublyLinkedListNode head)
+    {
+        DoublyLinkedListNode temp = head;
+        //1. Insert a duplicate node next to each node in the original list
+        while (temp != null) {
+            DoublyLinkedListNode node = new DoublyLinkedListNode(temp.getValue(), null, temp.getNext());
+            temp.setNext(node);
+            temp = node.getNext();
+        }
+
+        temp = head;
+        //2. set the previous pointer to all created nodes
+        while (temp != null) {
+            temp.getNext().setPrev(temp.getPrev().getNext());
+            temp = temp.getNext().getNext();
+        }
+
+        //3. restore next pointers
+        DoublyLinkedListNode newHead = head.getNext();
+        temp = head;
+        DoublyLinkedListNode copy = newHead;
+        while (temp != null) {
+            temp.setNext(temp.getNext().getNext());
+            if (copy.getNext() == null) {
+                copy.setNext(null);
+            } else {
+                copy.setNext(copy.getNext().getNext());
+                copy = copy.getNext();
+            }
+            temp = temp.getNext();
+        }
 
 
         return newHead;
+
     }
 
 }
