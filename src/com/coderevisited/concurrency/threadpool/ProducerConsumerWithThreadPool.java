@@ -1,23 +1,23 @@
 package com.coderevisited.concurrency.threadpool;
 
-import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ProducerConsumerWithThreadPool
 {
+    private static AtomicInteger rnd = new AtomicInteger(0);
     private final BlockingQueue<Integer> queue;
-    private static final Random rnd = new Random();
+
+    public ProducerConsumerWithThreadPool()
+    {
+        queue = new LinkedBlockingQueue<>(3);
+    }
 
     public static void main(String[] args)
     {
         ProducerConsumerWithThreadPool pc = new ProducerConsumerWithThreadPool();
         pc.init();
-    }
-
-    public ProducerConsumerWithThreadPool()
-    {
-        queue = new LinkedBlockingQueue<>(3);
     }
 
     private void init()
@@ -32,6 +32,7 @@ public class ProducerConsumerWithThreadPool
             pool.addTask(new Consumer());
             pool.addTask(new Consumer());
         }
+        pool.shutdown();
     }
 
     private class Producer implements Runnable
@@ -39,7 +40,7 @@ public class ProducerConsumerWithThreadPool
         @Override
         public void run()
         {
-            Integer e = rnd.nextInt(100);
+            Integer e = rnd.incrementAndGet();
             System.out.println("Inserting Element " + e);
             try {
                 queue.put(e);

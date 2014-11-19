@@ -10,11 +10,13 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class ThreadPool
 {
     private final BlockingQueue<Runnable> workerQueue;
+    private final Thread[] workerThreads;
+    private volatile boolean shutdown;
 
     public ThreadPool(int N)
     {
         workerQueue = new LinkedBlockingQueue<>();
-        Thread[] workerThreads = new Thread[N];
+        workerThreads = new Thread[N];
 
         //Start N Threads and keep them running
         for (int i = 0; i < N; i++) {
@@ -32,9 +34,24 @@ public class ThreadPool
         }
     }
 
-    private class Worker extends Thread
+    public void shutdown()
     {
+        while (!workerQueue.isEmpty()) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                //interruption
+            }
+        }
+        shutdown = true;
+        for (Thread workerThread : workerThreads) {
+            workerThread.interrupt();
+        }
+    }
 
+    private class Worker
+            extends Thread
+    {
         public Worker(String name)
         {
             super(name);
@@ -42,12 +59,13 @@ public class ThreadPool
 
         public void run()
         {
-            while (true) {
+            while (!shutdown) {
                 try {
+                    //each thread wait for next runnable and executes it's run method
                     Runnable r = workerQueue.take();
                     r.run();
-                } catch (InterruptedException | RuntimeException e) {
-                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    //ignore
                 }
             }
         }
