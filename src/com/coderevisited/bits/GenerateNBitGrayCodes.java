@@ -13,7 +13,7 @@ public class GenerateNBitGrayCodes
         }
     }
 
-    private static List<String> generateGrayCode(int n)
+    public static List<String> generateGrayCode(int n)
     {
         if (n == 1) {
             List<String> list = new ArrayList<>();
