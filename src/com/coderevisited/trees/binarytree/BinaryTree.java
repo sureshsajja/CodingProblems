@@ -99,6 +99,28 @@ public class BinaryTree
         BinaryTreeNode twelve = new BinaryTreeNode(12, eleven, thirteen);
         BinaryTreeNode ten = new BinaryTreeNode(10, seven, twelve);
         return new BinaryTreeNode(6, two, ten);
+    }
 
+    public static BinaryTreeNodeExtended buildTreeExtended()
+    {
+
+        /**
+         *               6
+         *             /   \
+         *           2      7
+         *          / \      \
+         *         11   4      19
+         *            / \    /
+         *           3   5  8
+         */
+        BinaryTreeNodeExtended eleven = new BinaryTreeNodeExtended(11, null, null);
+        BinaryTreeNodeExtended three = new BinaryTreeNodeExtended(3, null, null);
+        BinaryTreeNodeExtended five = new BinaryTreeNodeExtended(5, null, null);
+        BinaryTreeNodeExtended eight = new BinaryTreeNodeExtended(8, null, null);
+        BinaryTreeNodeExtended four = new BinaryTreeNodeExtended(4, three, five);
+        BinaryTreeNodeExtended two = new BinaryTreeNodeExtended(2, eleven, four);
+        BinaryTreeNodeExtended nineteen = new BinaryTreeNodeExtended(19, eight, null);
+        BinaryTreeNodeExtended seven = new BinaryTreeNodeExtended(7, null, nineteen);
+        return new BinaryTreeNodeExtended(6, two, seven);
     }
 }
