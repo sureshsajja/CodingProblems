@@ -53,6 +53,11 @@ import java.util.Scanner;
  * 2 3 0
  * <p/>
  * Maximum value in this matrix is 3 and it occurs 2 times.
+ *
+ * 1. For each integer N, find highest  bit set. (high)
+ * 2. Find XOR of high and N
+ * 3. if XOR is 0, max in number - 1, and it occurs N times.
+ * 4. Find the value of set bits (high-1 to 1). This is our Max and it occurs XOR*2 times
  */
 public class RoyAndMaximumXOR
 {
@@ -64,13 +69,13 @@ public class RoyAndMaximumXOR
 
         int T = scanner.nextInt();
         for (int t = 0; t < T; t++) {
-            long l = scanner.nextLong();
-            long highBit = Long.highestOneBit(l);
-            long max = getMax(highBit);
-            long xor = highBit ^ l;
+            long N = scanner.nextLong();
+            long highBit = Long.highestOneBit(N);
+            long xor = highBit ^ N;
             if (xor == 0) {
-                pw.println(l - 1 + " " + l);
+                pw.println(N - 1 + " " + N);
             } else {
+                long max = getMax(highBit);
                 pw.println(max + " " + xor * 2);
             }
         }
