@@ -1,9 +1,8 @@
 package com.hackerearth.aprileasy14;
 
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 /**
  * User : Suresh
@@ -45,24 +44,42 @@ import java.util.Scanner;
  */
 public class SubarrayXOR {
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+
+    private static BufferedReader reader;
+    private static StringTokenizer tokenizer;
+
+    private static String next() throws IOException {
+        while (!tokenizer.hasMoreTokens()) {
+            tokenizer = new StringTokenizer(
+                    reader.readLine());
+        }
+        return tokenizer.nextToken();
+    }
+
+    private static int nextInt() throws IOException {
+        return Integer.parseInt(next());
+    }
+
+
+    public static void main(String[] args) throws IOException {
+        reader = new BufferedReader(new InputStreamReader(System.in));
+        tokenizer = new StringTokenizer("");
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 
-        int T = scanner.nextInt();
+        int T = nextInt();
         for (int t = 0; t < T; t++) {
-            int N = scanner.nextInt();
+            int N = nextInt();
             int[] XOR = new int[N];
             int prev = 0;
             for (int n = 0; n < N; n++) {
-                int i = scanner.nextInt();
+                int i = nextInt();
                 XOR[n] = prev ^ i;
                 prev = XOR[n];
             }
-            int Q = scanner.nextInt();
+            int Q = nextInt();
             for (int q = 0; q < Q; q++) {
-                int a = scanner.nextInt();
-                int b = scanner.nextInt();
+                int a = nextInt();
+                int b = nextInt();
                 if (a > 0)
                     pw.println(XOR[a - 1] ^ XOR[b]);
                 else
@@ -70,7 +87,7 @@ public class SubarrayXOR {
             }
         }
 
-        scanner.close();
+        reader.close();
         pw.close();
     }
 }
