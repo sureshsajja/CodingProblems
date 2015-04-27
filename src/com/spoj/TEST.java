@@ -3,6 +3,9 @@ package com.spoj;
 import java.io.*;
 import java.util.StringTokenizer;
 
+/**
+ * http://www.spoj.com/problems/TEST/
+ */
 public class TEST {
     private static BufferedReader reader;
     private static StringTokenizer tokenizer;

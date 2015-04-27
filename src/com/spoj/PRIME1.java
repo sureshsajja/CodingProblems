@@ -4,35 +4,9 @@ import java.io.*;
 import java.util.StringTokenizer;
 
 /**
- * Peter wants to generate some prime numbers for his cryptosystem. Help him! Your task is to generate all prime numbers between two given numbers!
- * <p/>
- * Input
- * <p/>
- * The input begins with the number t of test cases in a single line (t<=10). In each of the next t lines there are two numbers m and n (1 <= m <= n <= 1000000000, n-m<=100000) separated by a space.
- * <p/>
- * Output
- * <p/>
- * For every test case print all prime numbers p such that m <= p <= n, one number per line, test cases separated by an empty line.
- * <p/>
- * Example
- * <p/>
- * Input
- * =====
- * 2
- * 1 10
- * 3 5
- * <p/>
- * Output
- * ======
- * 2
- * 3
- * 5
- * 7
- * <p/>
- * 3
- * 5*
+ * http://www.spoj.com/problems/PRIME1/
  */
-public class PrimalityTest {
+public class PRIME1 {
 
     private static BufferedReader reader;
     private static StringTokenizer tokenizer;

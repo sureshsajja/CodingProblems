@@ -4,6 +4,9 @@ package com.spoj;
 import java.io.*;
 import java.util.*;
 
+/**
+ * http://www.spoj.com/problems/ONP/
+ */
 public class ONP {
 
     private static BufferedReader reader;
