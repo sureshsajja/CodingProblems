@@ -63,7 +63,7 @@ public class ONP {
             if (isOperator(c)) {
                 while (!stack.isEmpty()) {
                     Character peek = stack.peek();
-                    if (isTopwithHigerPrecedence(peek, c)) {
+                    if (comparePrecedence(peek, c)) {
                         queue.add(stack.pop());
                     } else
                         break;
@@ -114,7 +114,7 @@ public class ONP {
         return token == '(';
     }
 
-    private static boolean isTopwithHigerPrecedence(char peek, char token) {
+    private static boolean comparePrecedence(char peek, char token) {
         return isOperator(peek) && operatorsMap.get(peek) > operatorsMap.get(token);
     }
 
