@@ -5,10 +5,11 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class AniruddhasQueue
-{
-    public static void main(String[] args)
-    {
+/**
+ * https://www.hackerearth.com/problem/algorithm/aniruddhas-queue-4/
+ */
+public class AniruddhasQueue {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 
