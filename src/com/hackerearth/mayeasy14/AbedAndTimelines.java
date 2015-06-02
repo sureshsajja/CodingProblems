@@ -11,6 +11,10 @@ import static java.lang.System.out;
  * Author : Suresh
  * Date : 02/06/15.
  */
+
+/**
+ * https://www.hackerearth.com/may-easy-challenge-14/algorithm/abed-and-timelines/
+ */
 public class AbedAndTimelines {
 
     private static BufferedReader reader;
