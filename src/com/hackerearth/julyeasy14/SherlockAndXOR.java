@@ -1,4 +1,4 @@
-package com.hackerearth.july14;
+package com.hackerearth.julyeasy14;
 
 import java.io.*;
 import java.util.ArrayList;
