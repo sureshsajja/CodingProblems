@@ -1,6 +1,9 @@
-package com.spoj;
+package com.hackerearth.januaryeasy15;
 
 import java.io.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import static java.lang.Integer.parseInt;
@@ -13,9 +16,9 @@ import static java.lang.System.out;
  */
 
 /**
- * http://www.spoj.com/problems/SAMER08F/
+ * https://www.hackerearth.com/problem/algorithm/ikshu-and-his-machine-gun/
  */
-public class SAMER08F {
+public class IkshuAndHisMachineGun {
 
     private static BufferedReader reader;
     private static StringTokenizer tokenizer;
@@ -38,17 +41,24 @@ public class SAMER08F {
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(out)));
 
         int N = nextInt();
-        while (N != 0) {
-            pw.println(calculate(N));
-            N = nextInt();
+        List<Integer> list = new LinkedList<>();
+        for (int i = 0; i < N; i++) {
+            list.add(nextInt());
         }
+
+        Collections.sort(list);
+
+        int diff = 0;
+        while (!list.isEmpty()) {
+            int removed = list.remove(0);
+            pw.print(removed - diff);
+            pw.print(" ");
+            diff++;
+        }
+        pw.println();
 
 
         reader.close();
         pw.close();
-    }
-
-    private static int calculate(int n) {
-        return (n * (n + 1) * (2 * n + 1)) / 6;
     }
 }

@@ -1,4 +1,4 @@
-package com.spoj;
+package com.hackerearth.easy;
 
 import java.io.*;
 import java.util.StringTokenizer;
@@ -13,9 +13,9 @@ import static java.lang.System.out;
  */
 
 /**
- * http://www.spoj.com/problems/SAMER08F/
+ * https://www.hackerearth.com/problem/algorithm/pattern/
  */
-public class SAMER08F {
+public class Pattern {
 
     private static BufferedReader reader;
     private static StringTokenizer tokenizer;
@@ -37,18 +37,28 @@ public class SAMER08F {
         tokenizer = new StringTokenizer("");
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(out)));
 
-        int N = nextInt();
-        while (N != 0) {
-            pw.println(calculate(N));
-            N = nextInt();
+        int n = nextInt();
+        for (int i = 0; i < n; i++) {
+            pw.print("*");
         }
+        pw.println();
+
+        int j = n - 1;
+        while (j > 1) {
+            for (int i = 1; i < j; i++) {
+                pw.print(" ");
+            }
+            pw.println("*");
+
+            j--;
+        }
+        for (int i = 0; i < n; i++) {
+            pw.print("*");
+        }
+        pw.println();
 
 
         reader.close();
         pw.close();
-    }
-
-    private static int calculate(int n) {
-        return (n * (n + 1) * (2 * n + 1)) / 6;
     }
 }
