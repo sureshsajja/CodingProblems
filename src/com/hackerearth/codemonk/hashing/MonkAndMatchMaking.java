@@ -23,7 +23,7 @@
  *
  */
 
-package com.coderevisited.strings;
+package com.hackerearth.codemonk.hashing;
 
 import java.io.*;
 import java.math.BigInteger;
@@ -36,13 +36,18 @@ import static java.lang.System.out;
 
 /**
  * User :  Suresh
- * Date :  09/07/15
+ * Date :  08/07/15
  * Version : v1
  */
-public class SubStringSearchRabinKarp {
+
+/**
+ * https://www.hackerearth.com/code-monk-hashing/algorithm/monk-and-match-making/
+ */
+public class MonkAndMatchMaking {
 
     private static final int SEED_PRIME = 257;
     private static final int PRIME = BigInteger.probablePrime(31, new Random()).intValue();
+
 
     private static BufferedReader reader;
     private static StringTokenizer tokenizer;
@@ -55,52 +60,45 @@ public class SubStringSearchRabinKarp {
         return tokenizer.nextToken();
     }
 
+    private static int nextInt() throws IOException {
+        return parseInt(next());
+    }
+
     public static void main(String[] args) throws IOException {
         reader = new BufferedReader(new InputStreamReader(in));
         tokenizer = new StringTokenizer("");
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(out)));
 
-        String pattern = next();
-        String text = next();
+        String s = next();
 
-        if (text.length() < pattern.length()) {
-            pw.println("No Match");
+        long[] pow = new long[s.length()];
+        pow[0] = 1;
+        for (int i = 1; i < s.length(); i++) {
+            pow[i] = (pow[i - 1] * SEED_PRIME) % PRIME;
         }
 
-        int pow = 1;
-        for (int i = 1; i < pattern.length(); i++) {
-            pow = (pow * SEED_PRIME) % PRIME;
-        }
+        long[] hash = new long[s.length() + 1];
 
-        int patternHash = hash(pattern, pattern.length());
-        int textHash = hash(text, pattern.length());
+        for (int j = 1; j < hash.length; j++)
+            hash[j] = (SEED_PRIME * hash[j - 1] + s.charAt(j - 1)) % PRIME;
 
-        if ((patternHash == textHash) && verify(text, pattern, 0))
-            pw.println("Match found at " + 0);
+        int Q = nextInt();
+        for (int q = 0; q < Q; q++) {
+            int a = nextInt();
+            int b = nextInt();
+            int c = nextInt();
+            int d = nextInt();
 
+            long hash1 = (hash[b] - (hash[a - 1] * pow[b - a + 1]) % PRIME + PRIME) % PRIME;
+            long hash2 = (hash[d] - (hash[c - 1] * pow[d - c + 1]) % PRIME + PRIME) % PRIME;
 
-        for (int i = pattern.length(); i < text.length(); i++) {
-            textHash = (textHash + PRIME - pow * text.charAt(i - pattern.length()) % PRIME) % PRIME;
-            textHash = (textHash * SEED_PRIME + text.charAt(i)) % PRIME;
-            int offset = i - pattern.length() + 1;
-            if ((patternHash == textHash) && verify(text, pattern, offset))
-                pw.println("Match found at " + offset);
+            if (hash1 == hash2) {
+                pw.println("Yes");
+            } else {
+                pw.println("No");
+            }
         }
         reader.close();
         pw.close();
-    }
-
-    private static int hash(String s, int length) {
-        int h = 0;
-        for (int j = 0; j < length; j++)
-            h = (SEED_PRIME * h + s.charAt(j)) % PRIME;
-        return h;
-    }
-
-    private static boolean verify(String txt, String pattern, int offset) {
-        for (int j = 0; j < pattern.length(); j++)
-            if (pattern.charAt(j) != txt.charAt(offset + j))
-                return false;
-        return true;
     }
 }
