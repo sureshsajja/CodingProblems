@@ -43,6 +43,7 @@ public class SomethingGenuine {
     private static BufferedReader reader;
     private static StringTokenizer tokenizer;
     private static final int MOD = 1000000007;
+    private static Segment[] tree;
 
     private static String next() throws IOException {
         while (!tokenizer.hasMoreTokens()) {
@@ -64,38 +65,86 @@ public class SomethingGenuine {
 
         int N = nextInt();
 
-        int[] array = new int[N];
+        int log = (int) Math.ceil(Math.log(N) / Math.log(2));
+        int size = 2 * (int) Math.pow(2, log) - 1;
+        tree = new Segment[size];
+        init(0, 0, N - 1);
+        int[] A = new int[N];
 
-        for (int n = 0; n < N; n++) {
-            array[n] = nextInt();
-        }
-
-
-        long[] squares = new long[N + 1];
-        for (int i = 1; i <= N; i++) {
-            squares[i] = i * i;
-        }
-
-
-        long total = 0;
+        int ans = 0;
         for (int i = 0; i < N; i++) {
-            boolean[] set = new boolean[N + 1];
-            set[array[i]] = true;
-            int size = 1;
-            total += 1;
-            for (int j = i + 1; j < N; j++) {
-                if (!set[array[j]]) {
-                    set[array[j]] = true;
-                    size++;
-                }
-                total = (total + squares[size]);
-            }
+            int a = nextInt();
+            update(0, 0, N-1, A[a], i);
+            ans = (ans + query(1, 1, N, 1, i)) % MOD;
+            A[a] = i;
         }
 
-        pw.println(total % MOD);
+        pw.println(ans);
 
 
         reader.close();
         pw.close();
+    }
+
+    private static void update(int index, int start, int end, int left, int right) {
+        if (right < start || end < left)
+            return;
+        if (left <= start && end <= right)
+            modify(index, 1);
+        else {
+            down(index);
+            int mid = (start + end) / 2;
+            update(index * 2 + 1, start, mid, left, right);
+            update(index * 2 + 2, mid + 1, end, left, right);
+            tree[index].sum1 = (tree[index * 2 + 1].sum1 + tree[index * 2 + 2].sum1) % MOD;
+            tree[index].sum2 = (tree[index * 2 + 1].sum2 + tree[index * 2 + 2].sum2) % MOD;
+        }
+    }
+
+    private static void modify(int index, int v) {
+        tree[index].sum2 = (int) ((tree[index].sum2 + 2L * tree[index].sum1 * v + (long) tree[index].sum0 * v * v) % MOD);
+        tree[index].sum1 = (int) ((tree[index].sum1 + (long) tree[index].sum0 * v) % MOD);
+        tree[index].lazy += v;
+    }
+
+    private static void init(int index, int start, int end) {
+        if (start == end) {
+            tree[index] = new Segment();
+            tree[index].sum0 = 1;
+            tree[index].sum1 = 0;
+            tree[index].sum2 = 0;
+        } else {
+            int mid = (start + end) / 2;
+            init(index * 2 + 1, start, mid);
+            init(index * 2 + 2, mid + 1, end);
+            tree[index] = new Segment();
+            tree[index].sum0 = tree[index * 2 + 1].sum0 + tree[index * 2 + 2].sum0;
+        }
+    }
+
+    private static int query(int index, int start, int end, int left, int right) {
+        if (right < start || end < start)
+            return 0;
+        if (left <= start && end <= right)
+            return tree[index].sum2;
+        down(index);
+        int mid = (start + end) / 2;
+        return (query(index * 2, start, mid, left, right) +
+                query(index * 2 + 1, mid + 1, end, left, right)) % MOD;
+    }
+
+    private static void down(int index) {
+        if (tree[index].lazy != 0) {
+            modify(index * 2, tree[index].lazy);
+            modify(index * 2 + 1, tree[index].lazy);
+            tree[index].lazy = 0;
+        }
+    }
+
+    private static class Segment {
+        int sum0;
+        int sum1;
+        int sum2;
+        int lazy;
     }
 }
