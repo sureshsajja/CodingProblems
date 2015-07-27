@@ -70,15 +70,18 @@ public class SomethingGenuine {
         tree = new int[size];
         lazy = new int[size];
 
-        buildTree(0, 0, N - 1);
+
 
         int[] last = new int[N];
+        for (int i = 0; i < N; i++) {
+            last[i] = -1;
+        }
 
         int ans = 0;
         for (int i = 0; i < N; i++) {
             int a = nextInt();
-            updateTree(0, 0, N - 1, last[a], i, 1);
-            int current = queryTree(0, 0, N - 1, i, i);
+            updateTree(0, 0, N - 1, last[a] + 1, i, 1);
+            int current = queryTree(0, 0, N - 1, 0, i);
             ans += current;
             last[a] = i;
         }
@@ -90,73 +93,52 @@ public class SomethingGenuine {
         pw.close();
     }
 
-    public static void buildTree(int index, int a, int b) {
-
-        if (a > b) {
+    public static void updateTree(int index, int start, int end, int left, int right, int value) {
+        if (left > end || right < start) {
             return;
         }
-        if (a == b) {
-            tree[index] = 0;
-            return;
-        }
-        buildTree(2 * index + 1, a, (a + b) / 2);
-        buildTree(2 * index + 2, (a + b) / 2 + 1, b);
-        tree[index] = tree[2 * index + 1] + tree[2 * index + 2];
-    }
-
-
-    public static void updateTree(int index, int a, int b, int i, int j, int value) {
-
-        if (a > b || a > j || b < i)
-            return;
-
-        if (lazy[index] != 0) {
-            tree[index] += lazy[index];
-            if (a != b) {
-                lazy[index * 2 + 1] += lazy[index];
-                lazy[index * 2 + 2] += lazy[index];
-            }
-            lazy[index] = 0;
-        }
-
-
-        if (a >= i && b <= j) {
+        if (start == end) {
             tree[index] += value;
-            if (a != b) {
-                lazy[index * 2 + 1] += value;
-                lazy[index * 2 + 2] += value;
+            if (lazy[index] != 0) {
+                tree[index] += lazy[index];
+                lazy[index] = 0;
             }
             return;
         }
-        if (a == b) return;
-        updateTree(index * 2 + 1, a, (a + b) / 2, i, j, value);
-        updateTree(index * 2 + 2, (a + b) / 2 + 1, b, i, j, value);
-        tree[index] = tree[2 * index + 1] + tree[2 * index + 2];
+        if (left <= start && right >= end) {
+            lazy[2 * index + 1] += value;
+            lazy[2 * index + 2] += value;
+            tree[index] += (value * (end - start + 1));
+            return;
+        } else if (left <= end && right > end)
+            tree[index] += (value * (end - left + 1));
+        else if (start <= right && left < start)
+            tree[index] += (value * (right - start + 1));
+        else if (left >= start && right <= end)
+            tree[index] += (value * (right - left + 1));
 
+        updateTree(2 * index + 1, start, (start + end) / 2, left, right, value);
+        updateTree((2 * index) + 2, ((start + end) / 2) + 1, end, left, right, value);
     }
 
-    public static int queryTree(int index, int a, int b, int i, int j) {
-
-        if (a > b || a > j || b < i)
+    public static int queryTree(int index, int start, int end, int left, int right) {
+        if (left > end || right < start)
             return 0;
-
         if (lazy[index] != 0) {
-            tree[index] += lazy[index];
-
-            if (a != b) {
-                lazy[index * 2 + 1] += lazy[index];
-                lazy[index * 2 + 2] += lazy[index];
+            tree[index] += (lazy[index] * (end - start + 1));
+            lazy[index] = 0;
+            if (start != end) {
+                lazy[2 * index + 1] += lazy[index];
+                lazy[2 * index + 2] += lazy[index];
             }
-
             lazy[index] = 0;
         }
-
-        if (a >= i && b <= j)
+        if (left <= start && right >= end) {
             return tree[index];
-
-        int q1 = queryTree(index * 2 + 1, a, (a + b) / 2, i, j);
-        int q2 = queryTree(index * 2 + 2, 1 + (a + b) / 2, b, i, j);
-        return q1 + q2;
+        }
+        int s1 = queryTree(2 * index + 1, start, (start + end) / 2, left, right);
+        int s2 = queryTree(2 * index + 2, ((start + end) / 2) + 1, end, left, right);
+        return s1 + s2;
     }
 
 
