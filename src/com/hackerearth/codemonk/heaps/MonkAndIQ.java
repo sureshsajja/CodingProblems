@@ -41,10 +41,9 @@ import static java.lang.System.out;
  */
 
 /**
- * https://www.hackerearth.com/code-monk-heaps-and-priority-queues/algorithm/monk-and-champions-league/
+ * https://www.hackerearth.com/problem/algorithm/monk-and-iq/
  */
-public class MonkAndChampionsLeague {
-
+public class MonkAndIQ {
 
     private static BufferedReader reader;
     private static StringTokenizer tokenizer;
@@ -66,31 +65,83 @@ public class MonkAndChampionsLeague {
         tokenizer = new StringTokenizer("");
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(out)));
 
+        int C = nextInt();
+        int P = nextInt();
+        int N = nextInt();
+        int[] array = new int[C];
 
-        PriorityQueue<Integer> queue = new PriorityQueue<Integer>(100000, new Comparator<Integer>() {
+        for (int n = 0; n < C; n++) {
+            array[n] = -1;
+        }
+
+
+        StringTokenizer _tokenizer = new StringTokenizer(reader.readLine());
+        int index = 0;
+        while (_tokenizer.hasMoreElements()) {
+            int i = Integer.parseInt(_tokenizer.nextToken());
+            array[index++] = i;
+        }
+
+        PriorityQueue<Course> queue = new PriorityQueue<Course>(100000, new Comparator<Course>() {
             @Override
-            public int compare(Integer i, Integer j) {
-                return i < (int) j ? 1 : (i == (int) j ? 0 : -1);
+            public int compare(Course i, Course j) {
+                return i.z > j.z ? 1 : (i.z == j.z ? (i.index > j.index ? 1 : (i.index == j.index ? 0 : -1)) : -1);
             }
         });
 
-        int M = nextInt();
-        int N = nextInt();
-        for (int m = 0; m < M; m++) {
-            queue.add(nextInt());
+        for (int i = 0; i < C; i++) {
+            queue.add(new Course(array[i], i));
         }
 
-        int sum = 0;
-        for (int n = 0; n < N; n++) {
-            int i = queue.poll();
-            sum += i;
-            queue.add(i - 1);
+        _tokenizer = new StringTokenizer(reader.readLine());
+        for (int p = 0; p < P; p++) {
+            int i = 0;
+            if (_tokenizer.hasMoreElements()) {
+                i = Integer.parseInt(_tokenizer.nextToken());
+            }
+            Course c = queue.poll();
+            pw.print(c.index + 1);
+            pw.print(" ");
+            c.addIQ(i);
+            queue.add(c);
         }
-
-        pw.println(sum);
 
 
         reader.close();
         pw.close();
+    }
+
+    private static class Course {
+        int z;
+        int index;
+        int first = -1;
+        int second = -1;
+        int c = 0;
+
+
+        public Course(int iq, int index) {
+            this.index = index;
+            if (iq != -1) {
+                z = iq;
+                first = iq;
+                this.c = 1;
+            } else {
+                this.z = 0;
+            }
+
+        }
+
+        public void addIQ(int i) {
+            if (first == -1) {
+                first = i;
+                z = first;
+                this.c = 1;
+            } else {
+                second = first;
+                first = i;
+                c++;
+                z = (first + second) * c;
+            }
+        }
     }
 }
