@@ -42,8 +42,9 @@ public class SomethingGenuine {
 
     private static BufferedReader reader;
     private static StringTokenizer tokenizer;
-    private static int[] tree;
+    private static int[] sum;
     private static int[] lazy;
+    private static int[] tree;
 
     private static String next() throws IOException {
         while (!tokenizer.hasMoreTokens()) {
@@ -67,8 +68,9 @@ public class SomethingGenuine {
 
         int log = (int) Math.ceil(Math.log(N) / Math.log(2));
         int size = 2 * (int) Math.pow(2, log) - 1;
-        tree = new int[size];
+        sum = new int[size];
         lazy = new int[size];
+        tree = new int[size];
 
 
 
@@ -93,52 +95,61 @@ public class SomethingGenuine {
         pw.close();
     }
 
-    public static void updateTree(int index, int start, int end, int left, int right, int value) {
-        if (left > end || right < start) {
-            return;
+    public static void updateTree(int index, int a, int b, int i, int j, int value) {
+
+        if (lazy[index] != 0) {
+            tree[index] += (2 * lazy[index] * sum[index]) + ((b - a + 1) * (lazy[index] * lazy[index]));
+            sum[index] += lazy[index] * (b - a + 1);
+            if (a != b) {
+                lazy[index * 2 + 1] += lazy[index];
+                lazy[index * 2 + 2] += lazy[index];
+            }
+            lazy[index] = 0;
         }
-        if (start == end) {
-            tree[index] += value;
-            if (lazy[index] != 0) {
-                tree[index] += lazy[index];
-                lazy[index] = 0;
+
+        if (a > b || a > j || b < i)
+            return;
+
+        if (a >= i && b <= j) {
+            tree[index] += (2 * value * sum[index]) + (b - a + 1) * (value * value);
+            sum[index] += value * (b - a + 1);
+            if (a != b) {
+                lazy[index * 2 + 1] += value;
+                lazy[index * 2 + 2] += value;
             }
             return;
         }
-        if (left <= start && right >= end) {
-            lazy[2 * index + 1] += value;
-            lazy[2 * index + 2] += value;
-            tree[index] += (value * (end - start + 1));
-            return;
-        } else if (left <= end && right > end)
-            tree[index] += (value * (end - left + 1));
-        else if (start <= right && left < start)
-            tree[index] += (value * (right - start + 1));
-        else if (left >= start && right <= end)
-            tree[index] += (value * (right - left + 1));
 
-        updateTree(2 * index + 1, start, (start + end) / 2, left, right, value);
-        updateTree((2 * index) + 2, ((start + end) / 2) + 1, end, left, right, value);
+        updateTree(index * 2 + 1, a, (a + b) / 2, i, j, value);
+        updateTree(index * 2 + 2, (a + b) / 2 + 1, b, i, j, value);
+        sum[index] = sum[2 * index + 1] + sum[2 * index + 2];
+        tree[index] = tree[2 * index + 1] + tree[2 * index + 2];
+
     }
 
-    public static int queryTree(int index, int start, int end, int left, int right) {
-        if (left > end || right < start)
+    public static int queryTree(int index, int a, int b, int i, int j) {
+
+        if (a > b || a > j || b < i)
             return 0;
+
         if (lazy[index] != 0) {
-            tree[index] += (lazy[index] * (end - start + 1));
-            lazy[index] = 0;
-            if (start != end) {
-                lazy[2 * index + 1] += lazy[index];
-                lazy[2 * index + 2] += lazy[index];
+            tree[index] += (2 * lazy[index] * sum[index]) + ((b - a + 1) * (lazy[index] * lazy[index]));
+            sum[index] += lazy[index] + (b - a + 1);
+
+            if (a != b) {
+                lazy[index * 2 + 1] += lazy[index];
+                lazy[index * 2 + 2] += lazy[index];
             }
+
             lazy[index] = 0;
         }
-        if (left <= start && right >= end) {
+
+        if (a >= i && b <= j)
             return tree[index];
-        }
-        int s1 = queryTree(2 * index + 1, start, (start + end) / 2, left, right);
-        int s2 = queryTree(2 * index + 2, ((start + end) / 2) + 1, end, left, right);
-        return s1 + s2;
+
+        int q1 = queryTree(index * 2 + 1, a, (a + b) / 2, i, j);
+        int q2 = queryTree(index * 2 + 2, 1 + (a + b) / 2, b, i, j);
+        return q1 + q2;
     }
 
 
