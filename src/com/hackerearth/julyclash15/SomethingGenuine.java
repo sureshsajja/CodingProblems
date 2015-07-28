@@ -38,13 +38,18 @@ import static java.lang.System.out;
  * Date :  18/07/15
  * Version : v1
  */
+
+/**
+ * https://www.hackerearth.com/july-clash-15/algorithm/something-genuine/
+ */
 public class SomethingGenuine {
 
     private static BufferedReader reader;
     private static StringTokenizer tokenizer;
-    private static int[] sum;
-    private static int[] lazy;
-    private static int[] tree;
+    private static long[] sum;
+    private static long[] lazy;
+    private static long[] tree;
+    private static final int MOD = 1000000007;
 
     private static String next() throws IOException {
         while (!tokenizer.hasMoreTokens()) {
@@ -68,14 +73,13 @@ public class SomethingGenuine {
 
         int log = (int) Math.ceil(Math.log(N) / Math.log(2));
         int size = 2 * (int) Math.pow(2, log) - 1;
-        sum = new int[size];
-        lazy = new int[size];
-        tree = new int[size];
+        sum = new long[size];
+        lazy = new long[size];
+        tree = new long[size];
 
 
-
-        int[] last = new int[N];
-        for (int i = 0; i < N; i++) {
+        int[] last = new int[N + 1];
+        for (int i = 0; i <= N; i++) {
             last[i] = -1;
         }
 
@@ -83,8 +87,10 @@ public class SomethingGenuine {
         for (int i = 0; i < N; i++) {
             int a = nextInt();
             updateTree(0, 0, N - 1, last[a] + 1, i, 1);
-            int current = queryTree(0, 0, N - 1, 0, i);
+            long current = queryTree(0, 0, N - 1, 0, i);
+            current %= MOD;
             ans += current;
+            ans %= MOD;
             last[a] = i;
         }
 
@@ -99,7 +105,9 @@ public class SomethingGenuine {
 
         if (lazy[index] != 0) {
             tree[index] += (2 * lazy[index] * sum[index]) + ((b - a + 1) * (lazy[index] * lazy[index]));
+            tree[index] %= MOD;
             sum[index] += lazy[index] * (b - a + 1);
+            sum[index] %= MOD;
             if (a != b) {
                 lazy[index * 2 + 1] += lazy[index];
                 lazy[index * 2 + 2] += lazy[index];
@@ -112,7 +120,9 @@ public class SomethingGenuine {
 
         if (a >= i && b <= j) {
             tree[index] += (2 * value * sum[index]) + (b - a + 1) * (value * value);
+            tree[index] %= MOD;
             sum[index] += value * (b - a + 1);
+            sum[index] %= MOD;
             if (a != b) {
                 lazy[index * 2 + 1] += value;
                 lazy[index * 2 + 2] += value;
@@ -127,14 +137,17 @@ public class SomethingGenuine {
 
     }
 
-    public static int queryTree(int index, int a, int b, int i, int j) {
+    public static long queryTree(int index, int a, int b, int i, int j)
+    {
 
         if (a > b || a > j || b < i)
             return 0;
 
         if (lazy[index] != 0) {
             tree[index] += (2 * lazy[index] * sum[index]) + ((b - a + 1) * (lazy[index] * lazy[index]));
+            tree[index] %= MOD;
             sum[index] += lazy[index] + (b - a + 1);
+            sum[index] %= MOD;
 
             if (a != b) {
                 lazy[index * 2 + 1] += lazy[index];
@@ -147,9 +160,9 @@ public class SomethingGenuine {
         if (a >= i && b <= j)
             return tree[index];
 
-        int q1 = queryTree(index * 2 + 1, a, (a + b) / 2, i, j);
-        int q2 = queryTree(index * 2 + 2, 1 + (a + b) / 2, b, i, j);
-        return q1 + q2;
+        long q1 = queryTree(index * 2 + 1, a, (a + b) / 2, i, j);
+        long q2 = queryTree(index * 2 + 2, 1 + (a + b) / 2, b, i, j);
+        return (q1 % MOD + q2 % MOD) % MOD;
     }
 
 
