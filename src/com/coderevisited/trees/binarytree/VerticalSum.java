@@ -27,6 +27,13 @@ package com.coderevisited.trees.binarytree;
 
 import java.util.HashMap;
 
+/**
+ * 1. Initialize a Hashmap.
+ * 2. root index is 0
+ * 3. Left Child index = root index - 1;
+ * 4. Right child index = root index + 1
+ * 5. Update count in map
+ */
 public class VerticalSum
 {
     public static void main(String[] args)
@@ -51,9 +58,11 @@ public class VerticalSum
         if (!map.containsKey(index)) {
             map.put(index, 0);
         }
+        //Update root sum
         int sum = map.get(index);
         sum += root.getValue();
         map.put(index, sum);
+        //Recur left and right
         findVerticalSum(root.getLeft(), map, index - 1);
         findVerticalSum(root.getRight(), map, index + 1);
 
