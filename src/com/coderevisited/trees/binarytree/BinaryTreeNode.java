@@ -27,9 +27,9 @@ package com.coderevisited.trees.binarytree;
 
 public class BinaryTreeNode
 {
-    private final int value;
-    private BinaryTreeNode left;
-    private BinaryTreeNode right;
+    protected final int value;
+    protected BinaryTreeNode left;
+    protected BinaryTreeNode right;
 
     public BinaryTreeNode(int value, BinaryTreeNode left, BinaryTreeNode right)
     {

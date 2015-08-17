@@ -108,6 +108,7 @@ public class BinaryTreeTraversal
                 bfsQueue.add(n.getRight());
             }
         }
+        System.out.println();
     }
 
     public static void printSpiralOder(BinaryTreeNode node)

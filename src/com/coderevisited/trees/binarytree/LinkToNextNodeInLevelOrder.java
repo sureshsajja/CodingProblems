@@ -34,8 +34,11 @@ public class LinkToNextNodeInLevelOrder
     public static void main(String[] args)
     {
         BinaryTreeNodeExtended root = BinaryTree.buildTreeExtended();
+        BinaryTreeTraversal.printLevelOrder(root);
+        System.out.println("Linking next nodes in level order traversal");
         linkToNextNodeInLevelOrder(root);
-        System.out.println(root.getValue());
+
+        System.out.println(((BinaryTreeNodeExtended) (root.getLeft())).getNextRight().getValue());
     }
 
     private static void linkToNextNodeInLevelOrder(BinaryTreeNodeExtended root)
@@ -48,22 +51,29 @@ public class LinkToNextNodeInLevelOrder
         }
 
         while (!bfsQueue.isEmpty()) {
+            //Remove first node from queue
             BinaryTreeNodeExtended node = bfsQueue.poll();
+            //get level of this node
             int level = levelQueue.poll();
+            //get next node in queue
             BinaryTreeNodeExtended peek = bfsQueue.peek();
             if (peek != null) {
+                //If there is a next node.
                 int peekLevel = levelQueue.peek();
                 if (peekLevel == level) {
+                    //if levels are same. link it
                     node.setNextRight(peek);
                 }
             }
+            //recur left
             if (node.getLeft() != null) {
-                bfsQueue.add(node.getLeft());
+                bfsQueue.add((BinaryTreeNodeExtended) node.getLeft());
                 levelQueue.add(level + 1);
             }
 
+            //recur right
             if (node.getRight() != null) {
-                bfsQueue.add(node.getRight());
+                bfsQueue.add((BinaryTreeNodeExtended) node.getRight());
                 levelQueue.add(level + 1);
             }
         }
