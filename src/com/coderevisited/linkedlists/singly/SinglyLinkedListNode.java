@@ -51,4 +51,8 @@ public class SinglyLinkedListNode
     {
         this.next = next;
     }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
 }
