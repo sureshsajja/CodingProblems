@@ -32,7 +32,7 @@ public class KDistantFromLeaf
     public static void main(String[] args)
     {
         BinaryTreeNode root = BinaryTree.buildTree();
-        printKDistantFromLeaf(root, new int[MAX_HEIGHT], new boolean[MAX_HEIGHT], 4, 0);
+        printKDistantFromLeaf(root, new int[MAX_HEIGHT], new boolean[MAX_HEIGHT], 3, 0);
     }
 
 

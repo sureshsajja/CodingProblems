@@ -29,9 +29,9 @@ import com.coderevisited.trees.binarytree.BinaryTreeNode;
 import com.coderevisited.trees.binarytree.BinaryTreeTraversal;
 
 /**
- * 1. Start from first integer as root and set left child range as MIN, root. set right child range as root, MAX 2. At
- * each step we verify if the given key is in the range, then create node and make calls for left and right child 3. To
- * keep track of index, we use array of size 1 because at each point we should not go back to already processed key
+ * 1. Start from first integer as root and set left child range as MIN, root. set right child range as root, MAX
+ * 2. At each step we verify if the given key is in the range, then create node and make calls for left and right child
+ * 3. To keep track of index, we use array of size 1 because at each point we should not go back to already processed key
  */
 public class BSTFromPreOrderTraversal
 {

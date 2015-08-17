@@ -40,6 +40,7 @@ public class BinarySearchTreeLCA
     private static int findLCA(int n1, int n2, BinaryTreeNode node)
     {
         BinaryTreeNode lca = findLCAUtil(n1, n2, node);
+        //Check if n1 is actually exists
         if (find(n1, lca) && find(n2, lca))
             return lca.getValue();
         return -1;
@@ -61,13 +62,16 @@ public class BinarySearchTreeLCA
     {
         if (root == null)
             return null;
+        //Check if n1, n2 are left side of the BST
         if (root.getValue() > n1 && root.getValue() > n2) {
             return findLCAUtil(n1, n2, root.getLeft());
         }
 
+        //Check if n1, n2 are right side of the BST
         if (root.getValue() < n1 && root.getValue() < n2) {
             return findLCAUtil(n1, n2, root.getRight());
         }
+        //n1, n2 are not in the same side. so root is the LCA
         return root;
     }
 }
