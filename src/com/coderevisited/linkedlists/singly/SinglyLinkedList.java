@@ -77,6 +77,20 @@ public class SinglyLinkedList
         return new SinglyLinkedListNode(11, h);
     }
 
+    public static SinglyLinkedListNode buildListWithDuplicates() {
+
+        SinglyLinkedListNode a = new SinglyLinkedListNode(12, null);
+        SinglyLinkedListNode b = new SinglyLinkedListNode(8, a);
+        SinglyLinkedListNode c = new SinglyLinkedListNode(6, b);
+        SinglyLinkedListNode d = new SinglyLinkedListNode(14, c);
+        SinglyLinkedListNode e = new SinglyLinkedListNode(7, d);
+        SinglyLinkedListNode f = new SinglyLinkedListNode(8, e);
+        SinglyLinkedListNode g = new SinglyLinkedListNode(6, f);
+        SinglyLinkedListNode h = new SinglyLinkedListNode(0, g);
+        return new SinglyLinkedListNode(11, h);
+
+    }
+
     public static int getLength(SinglyLinkedListNode head)
     {
         int count = 0;
