@@ -47,6 +47,7 @@ public class SerializeAndDeserializer
         System.out.println();
     }
 
+    //Reading from serialized array, if value is -1, child is null.
     private static BinaryTreeNode deserializer(int[] array, int[] index)
     {
         if (index[0] >= array.length || array[index[0]] == -1) {
@@ -62,6 +63,7 @@ public class SerializeAndDeserializer
 
     }
 
+    //Save PreOrder traversal by inserting -1 for null values
     private static void serialize(BinaryTreeNode root)
     {
         if (root == null) {
