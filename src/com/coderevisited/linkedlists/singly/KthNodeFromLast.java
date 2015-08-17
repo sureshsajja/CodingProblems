@@ -41,6 +41,14 @@ public class KthNodeFromLast
             pw.println("5th Node from last :" + node.getValue());
         else
             pw.println("Node not found");
+
+        node = findKthNodeFromLastRecursive(head, 5, new int[1]);
+        if (node != null)
+            pw.println("5th Node from last :" + node.getValue());
+        else
+            pw.println("Node not found");
+
+
         pw.close();
     }
 
@@ -67,5 +75,19 @@ public class KthNodeFromLast
             return ptr1;
         else
             return null;
+    }
+
+    private static SinglyLinkedListNode findKthNodeFromLastRecursive(SinglyLinkedListNode head, int k, int[] i) {
+
+        if (head == null) {
+            return null;
+        }
+
+        SinglyLinkedListNode node = findKthNodeFromLastRecursive(head.getNext(), k, i);
+        i[0] = i[0] + 1;
+        if (i[0] == k) {
+            return head;
+        }
+        return node;
     }
 }
