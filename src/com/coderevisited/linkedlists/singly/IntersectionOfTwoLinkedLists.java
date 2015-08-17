@@ -41,6 +41,7 @@ public class IntersectionOfTwoLinkedLists
         SinglyLinkedList.printList(head1, pw);
         SinglyLinkedList.printList(head2, pw);
         SinglyLinkedListNode intersection = findIntersectionOfTwoLists(head1, head2);
+        if (intersection != null)
         pw.println("Intersection of two lists : " + intersection.getValue());
         pw.close();
 
