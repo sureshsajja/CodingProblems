@@ -42,6 +42,7 @@ public class LoopInALinkedList
         int length = findLengthOfTheLoop(head);
         pw.println("Length of the loop: " + length);
         SinglyLinkedListNode start = startNodeOfTheLoop(head);
+        if (start != null)
         pw.println("Start node of the loop: " + start.getValue());
 
         pw.close();
