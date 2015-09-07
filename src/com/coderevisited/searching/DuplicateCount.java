@@ -54,7 +54,7 @@ public class DuplicateCount
             } else
                 high = mid - 1;
         }
-        return -1;
+        return -(low + 1);
     }
 
     public static int maxIndexBinarySearch(int[] array, int low, int high, int key)
