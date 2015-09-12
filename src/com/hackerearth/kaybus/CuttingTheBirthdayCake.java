@@ -37,6 +37,14 @@ import static java.lang.System.out;
  * Date :  06/09/15
  * Version : v1
  */
+
+/**
+ * https://www.hackerearth.com/kaybus-hiring-challenge/algorithm/cutting-the-birthday-cake/
+ * <p>
+ * diagonal from given rectangle sqrt(a^2+b^2)
+ * Diameter of circle 2R
+ */
+
 public class CuttingTheBirthdayCake {
 
     private static BufferedReader reader;
@@ -66,37 +74,12 @@ public class CuttingTheBirthdayCake {
             int B = nextInt();
 
 
-            double circle = ((double) 22 * R * R) / (double) 7;
-            double rectangle = A * B;
-
-            boolean isFirst = true;
-            int alice = 0;
-            int bob = 0;
-
-            while (circle >= 0) {
-                circle -= rectangle;
-                if (circle > 0) {
-                    if (isFirst) {
-                        alice++;
-                    } else {
-                        bob++;
-                    }
-                }
-                isFirst = !isFirst;
-            }
-
-            if (alice == bob) {
-                pw.println("EQUAL");
-            } else if (alice > bob) {
+            if (A * A + B * B <= 4 * R * R) {
                 pw.println("ALICE");
             } else {
-                pw.println("BOB");
+                pw.println("EQUAL");
             }
-
-
         }
-
-
         reader.close();
         pw.close();
     }
