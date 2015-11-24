@@ -26,9 +26,9 @@
 package com.hackerearth.xseed;
 
 import java.io.*;
-import java.util.Set;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.StringTokenizer;
-import java.util.TreeSet;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.System.in;
@@ -38,6 +38,12 @@ import static java.lang.System.out;
  * User :  Suresh
  * Date :  12/07/15
  * Version : v1
+ */
+
+/**
+ * 1. sort based on marks
+ * 2. If marks are equal, set prev rank
+ * 3. keep track of no of marks greater than current mark
  */
 public class TheCompetitiveClass {
 
@@ -62,27 +68,73 @@ public class TheCompetitiveClass {
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(out)));
 
         int N = nextInt();
-        Set<Integer> marksSet = new TreeSet<>();
-        int[] marks = new int[N];
+
+        Mark[] marks = new Mark[N];
         for (int n = 0; n < N; n++) {
-            marks[n] = nextInt();
-            marksSet.add(marks[n]);
+            marks[n] = new Mark(nextInt(), 0, n);
         }
 
-        int[] sorted = new int[1001];
-        int index = marksSet.size();
-        for (Integer i : marksSet) {
-            sorted[i] = index--;
+        Arrays.sort(marks, new MarksComparator());
+
+
+        Mark prev = marks[N - 1];
+        prev.rank = 1;
+        int noOfGreaterMarks = 1;
+        for (int i = N - 2; i >= 0; i--) {
+            if (prev.marks == marks[i].marks) {
+                marks[i].rank = prev.rank;
+            } else {
+                marks[i].rank = noOfGreaterMarks + 1;
+            }
+            noOfGreaterMarks++;
+            prev = marks[i];
         }
 
-        for (Integer i : marks) {
-            pw.print(sorted[i] + " ");
+        Arrays.sort(marks, new IndexComparator());
+        for (int i = 0; i < N; i++) {
+            pw.print(marks[i].rank + " ");
         }
 
         pw.println();
-
-
         reader.close();
         pw.close();
+    }
+
+    private static class Mark {
+        private int marks;
+        private int rank;
+        private int index;
+
+        public Mark(int marks, int rank, int index) {
+            this.marks = marks;
+            this.index = index;
+            this.rank = rank;
+        }
+    }
+
+    private static class MarksComparator implements Comparator<Mark> {
+
+        @Override
+        public int compare(Mark m1, Mark m2) {
+            if (m1.marks < m2.marks)
+                return -1;
+            else if (m1.marks > m2.marks)
+                return 1;
+            else
+                return 0;
+        }
+    }
+
+    private static class IndexComparator implements Comparator<Mark> {
+
+        @Override
+        public int compare(Mark m1, Mark m2) {
+            if (m1.index < m2.index)
+                return -1;
+            else if (m1.index > m2.index)
+                return 1;
+            else
+                return 0;
+        }
     }
 }

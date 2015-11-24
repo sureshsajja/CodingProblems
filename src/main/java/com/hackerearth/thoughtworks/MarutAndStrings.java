@@ -59,7 +59,12 @@ public class MarutAndStrings {
         tokenizer = new StringTokenizer("");
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(out)));
 
-        int T = nextInt();
+        int T;
+        try {
+            T = nextInt();
+        } catch (RuntimeException e) {
+            T = 0;
+        }
         if (T < 1 || T > 10) {
             pw.println("Invalid Test");
         } else {
