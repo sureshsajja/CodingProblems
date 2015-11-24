@@ -28,7 +28,6 @@ package com.hackerearth.cleartrip;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLDecoder;
 import java.util.StringTokenizer;
 
 import static java.lang.Integer.parseInt;
@@ -41,8 +40,6 @@ import static java.lang.System.out;
  * Version : v1
  */
 public class TheArtofVerification {
-
-
     private static BufferedReader reader;
     private static StringTokenizer tokenizer;
 
@@ -66,18 +63,24 @@ public class TheArtofVerification {
         String s = next();
         URL url = new URL(s);
         String query = url.getQuery();
-        String[] params = query.split("&");
+        int username = query.indexOf("username");
+        int pwd = query.indexOf("pwd");
+        int profile = query.indexOf("profile");
+        int role = query.indexOf("role");
+        int key = query.indexOf("key");
 
-        for (String param : params) {
-            String[] nameValue = param.split("=");
-            if (nameValue.length > 1) {
-                pw.print(URLDecoder.decode(nameValue[0],"UTF-8"));
-                pw.print(": ");
-                pw.print(URLDecoder.decode(nameValue[1],"UTF-8"));
-                pw.println();
-            }
+        String s1 = query.substring(username, pwd-1);
+        String s2 = query.substring(pwd, profile-1);
+        String s3 = query.substring(profile, role-1);
+        String s4 = query.substring(role, key-1);
+        String s5 = query.substring(key);
 
-        }
+        pw.println("username: " + s1.substring(s1.indexOf("=") + 1));
+        pw.println("pwd: " + s2.substring(s2.indexOf("=") + 1));
+        pw.println("profile: " + s3.substring(s3.indexOf("=") + 1));
+        pw.println("role: " + s4.substring(s4.indexOf("=") + 1));
+        pw.println("key: " + s5.substring(s5.indexOf("=") + 1));
+
 
 
         reader.close();
