@@ -36,6 +36,10 @@ import static java.lang.System.out;
  * Date    : 12/07/16
  * Version : v1
  */
+
+/**
+ * http://www.csse.monash.edu.au/~lloyd/tildeAlgDS/Sort/Flag/
+ */
 public class SortingBy3WayPartition {
 
     private static BufferedReader reader;

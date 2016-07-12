@@ -20,51 +20,31 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- *
  */
 
 package com.coderevisited.trees.binarytree;
 
-public class BinaryTreeNode
-{
+/**
+ * User    : Suresh
+ * Date    : 12/07/16
+ * Version : v1
+ */
+public class SumTree {
 
-    protected int value;
-    protected BinaryTreeNode left;
-    protected BinaryTreeNode right;
-
-    public BinaryTreeNode(int value, BinaryTreeNode left, BinaryTreeNode right)
-    {
-        this.value = value;
-        this.left = left;
-        this.right = right;
+    public static void main(String[] args) {
+        BinaryTreeNode root = BinaryTree.buildTree();
+        converToSumTree(root);
+        BinaryTreeTraversal.printLevelOrder(root);
     }
 
-    public int getValue()
-    {
-        return value;
+    private static int converToSumTree(BinaryTreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int value = root.getValue();
+        root.setValue(converToSumTree(root.getLeft()) + converToSumTree(root.getRight()));
+        return root.getValue()+value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    public BinaryTreeNode getLeft()
-    {
-        return left;
-    }
-
-    public BinaryTreeNode getRight()
-    {
-        return right;
-    }
-
-    public void setLeft(BinaryTreeNode left)
-    {
-        this.left = left;
-    }
-
-    public void setRight(BinaryTreeNode right)
-    {
-        this.right = right;
-    }
 }
