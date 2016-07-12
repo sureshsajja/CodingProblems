@@ -38,22 +38,23 @@ public class BSTFromPreOrderTraversal
     public static void main(String[] args)
     {
         int[] preOrder = new int[]{10, 5, 1, 7, 40, 50};
-        BinaryTreeNode root = constructBST(preOrder, new int[]{0}, Integer.MIN_VALUE, Integer.MAX_VALUE, preOrder[0]);
+        BinaryTreeNode root = constructBST(preOrder, new int[]{0}, Integer.MIN_VALUE, Integer.MAX_VALUE);
         BinaryTreeTraversal.printInOrder(root);
     }
 
-    public static BinaryTreeNode constructBST(int[] preOrder, int[] index, int min, int max, int key)
+    public static BinaryTreeNode constructBST(int[] preOrder, int[] index, int min, int max)
     {
         if (index[0] >= preOrder.length) {
             return null;
         }
         BinaryTreeNode root = null;
+        int key = preOrder[index[0]];
         if (min < key && max > key) {
             root = new BinaryTreeNode(preOrder[index[0]], null, null);
             index[0] = index[0] + 1;
             if (index[0] < preOrder.length) {
-                root.setLeft(constructBST(preOrder, index, min, key, preOrder[index[0]]));
-                root.setRight(constructBST(preOrder, index, key, max, preOrder[index[0]]));
+                root.setLeft(constructBST(preOrder, index, min, key));
+                root.setRight(constructBST(preOrder, index, key, max));
             }
         }
         return root;
