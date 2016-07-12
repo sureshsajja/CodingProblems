@@ -72,19 +72,25 @@ public class KthSmallest
 
     private static int partition(int[] ar, int lo, int hi)
     {
+        int mid = hi;
         int pivot = ar[hi];
-        int i = lo - 1;
-        for (int j = lo; j < hi; j++) {
-            if (ar[j] <= pivot) {
-                i++;
-                int temp = ar[i];
-                ar[i] = ar[j];
-                ar[j] = temp;
+        while(lo <= mid){
+            if(ar[mid] > pivot){
+                int temp = ar[mid];
+                ar[mid] = ar[hi];
+                ar[hi] = temp;
+                mid--;
+                hi--;
+            }
+            else if(ar[mid] == pivot){
+                mid--;
+            }else if(ar[mid] < pivot){
+                int temp = ar[lo];
+                ar[lo] = ar[mid];
+                ar[mid] = temp;
+                lo++;
             }
         }
-        int temp = ar[i + 1];
-        ar[i + 1] = ar[hi];
-        ar[hi] = temp;
-        return i + 1;
+        return mid+1;
     }
 }
