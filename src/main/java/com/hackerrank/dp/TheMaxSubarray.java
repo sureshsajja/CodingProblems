@@ -33,9 +33,7 @@ import static java.lang.System.in;
 import static java.lang.System.out;
 
 /**
- * User :  Suresh
- * Date :  04/09/15
- * Version : v1
+ * User :  Suresh Date :  04/09/15 Version : v1
  */
 
 /**
@@ -57,11 +55,11 @@ public class TheMaxSubarray {
 
     private static BufferedReader reader;
     private static StringTokenizer tokenizer;
+    private static PrintWriter pw;
 
     private static String next() throws IOException {
         while (!tokenizer.hasMoreTokens()) {
-            tokenizer = new StringTokenizer(
-                    reader.readLine());
+            tokenizer = new StringTokenizer(reader.readLine());
         }
         return tokenizer.nextToken();
     }
@@ -71,9 +69,19 @@ public class TheMaxSubarray {
     }
 
     public static void main(String[] args) throws IOException {
+
         reader = new BufferedReader(new InputStreamReader(in));
         tokenizer = new StringTokenizer("");
-        PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(out)));
+        pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(out)));
+
+        solve();
+
+        reader.close();
+        pw.close();
+
+    }
+
+    public static void solve() throws IOException {
 
         int T = nextInt();
         for (int t = 0; t < T; t++) {
@@ -110,9 +118,5 @@ public class TheMaxSubarray {
             pw.print(" ");
             pw.println(positiveSum);
         }
-
-
-        reader.close();
-        pw.close();
     }
 }
