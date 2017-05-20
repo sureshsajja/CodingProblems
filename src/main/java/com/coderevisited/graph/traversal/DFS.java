@@ -39,6 +39,11 @@ public class DFS {
         Graph g = Graph.buildGraph();
         boolean[] visited = new boolean[g.getV()+1];
         dfs(g.getAdj(), visited, 1);
+        System.out.println();
+        visited = new boolean[g.getV() + 1];
+        int[] length = new int[1];
+        getLength(g.getAdj(), visited, 1, 2, length);
+        System.out.println(length[0]);
     }
 
     private static void dfs(List<List<Integer>> adj, boolean[] visited, int vertex) {
@@ -50,5 +55,23 @@ public class DFS {
                 dfs(adj, visited, i);
             }
         }
+    }
+
+
+    private static boolean getLength(List<List<Integer>> adj, boolean[] visited, int vertex, int endVertex, int[] length)
+    {
+        if (vertex == endVertex) {
+            return true;
+        }
+        visited[vertex] = true;
+        List<Integer> list = adj.get(vertex);
+        for (Integer i : list) {
+            if (!visited[i]) {
+                length[0]++;
+                if (getLength(adj, visited, i, endVertex, length))
+                    return true;
+            }
+        }
+        return false;
     }
 }
